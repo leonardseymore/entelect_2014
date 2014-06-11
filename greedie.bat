@@ -1,0 +1,1 @@
+bot Greedie %1

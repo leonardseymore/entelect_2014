@@ -1,0 +1,1 @@
+PacManDuel C:\Users\leonard\Applications\TestHarness-v1-2\testA %1 C:\Users\leonard\Applications\TestHarness-v1-2\testB %2

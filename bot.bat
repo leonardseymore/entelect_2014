@@ -1,0 +1,1 @@
+java -cp "C:\Users\leonard\Dropbox\Software Developer\java\entelect\pacman\pacman\target\pacman-1.0-SNAPSHOT-jar-with-dependencies.jar" za.co.entelect.challenge.MainTestHarness za.co.entelect.challenge.agents.%1 %2

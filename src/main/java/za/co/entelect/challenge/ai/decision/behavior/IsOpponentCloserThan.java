@@ -1,0 +1,33 @@
+package za.co.entelect.challenge.ai.decision.behavior;
+
+import za.co.entelect.challenge.agents.PacmanAgent;
+import za.co.entelect.challenge.ai.search.Search;
+import za.co.entelect.challenge.ai.search.SearchCriteriaFactory;
+import za.co.entelect.challenge.ai.search.SearchNode;
+import za.co.entelect.challenge.domain.GameState;
+import za.co.entelect.challenge.domain.XY;
+
+import java.util.Stack;
+
+public class IsOpponentCloserThan extends Task {
+
+    private int dist;
+
+    public IsOpponentCloserThan(int dist) {
+        this.dist = dist;
+    }
+
+    public boolean run(PacmanAgent pacmanAgent, GameState gameState) {
+        XY pos = gameState.getCurrentPosition();
+        Stack<SearchNode> path = Search.bfs(gameState, pos, SearchCriteriaFactory.nodeIsOpponent);
+        if (path == null) {
+            return false;
+        }
+        return path.size() < dist;
+    }
+
+    @Override
+    protected String getLabel() {
+        return "IsOpponentCloserThan " + dist + "?";
+    }
+}

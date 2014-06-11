@@ -1,0 +1,2 @@
+echo Starting > ./out.log
+java -cp "C:\Users\leonard\Dropbox\Software Developer\java\entelect\pacman\pacman\target\pacman-1.0-SNAPSHOT-jar-with-dependencies.jar" za.co.entelect.challenge.MainTestHarness za.co.entelect.challenge.agents.Greedie %1 >> ./out.log 2>&1
