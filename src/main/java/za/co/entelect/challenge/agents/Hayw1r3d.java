@@ -19,7 +19,7 @@ public class Hayw1r3d extends BehaviorTreeAgent {
                                                 .a(new MoveToTarget())
                                         )
                                         .a(new Selector()
-                                                .a(new MoveToHighestPotentialPill(true, numMatches))
+                                                .a(new MoveToHighestPotentialPill(false, numMatches))
                                                 .a(new MoveToClosestPill())
                                         )
                         )

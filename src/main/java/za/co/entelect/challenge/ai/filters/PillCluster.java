@@ -107,6 +107,9 @@ public class PillCluster {
             clusteredCells.clear();
             cells:
             for (XY cell : cells) {
+                if (gameState.isPoisonPill(cell)) {
+                    continue cells;
+                }
                 for (SearchNode searchNode : Search.getAvailableNeighbors(gameState, new SearchNode(cell))) {
                     char c = gameState.getCell(cell);
                     if (!cells.contains(searchNode.pos) || c != Constants.SPACE) {
