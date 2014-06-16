@@ -139,13 +139,6 @@ public class InfluenceMap {
             }
         }
 
-        Map<XY, Float> clusteredPills = PillCluster.getCellPotential(gameState);
-        for (Map.Entry<XY, Float> clusteredPill : clusteredPills.entrySet()) {
-            XY pill = clusteredPill.getKey();
-            float val = clusteredPill.getValue();
-            pillCluster[pill.x][pill.y] = val;
-        }
-
         // apply new influence
         // influence = 1 / sqrt(dist)
         for (char player : new char[]{Constants.PLAYER_A, Constants.PLAYER_B}) {
@@ -160,13 +153,11 @@ public class InfluenceMap {
             }
         }
 
-        Map<XY, Float> cellPotentials = PillCluster.getCellPotential(gameState);
-        for (Map.Entry<XY, Float> potential : cellPotentials.entrySet()) {
-            XY key = potential.getKey();
-            float val = potential.getValue();
-            int x = key.x;
-            int y = key.y;
-            potentialMap[x][y] += val;
+        pillCluster = PillCluster.getCellPotential(gameState);
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                potentialMap[i][j] += pillCluster[i][j];
+            }
         }
 
         // calculate and normalize influence maps

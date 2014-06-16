@@ -12,7 +12,7 @@ import java.util.*;
 
 public class PillCluster {
 
-    public static Map<XY, Float> getCellPotential(GameState gameState) {
+    public static float[][] getCellPotential(GameState gameState) {
         Map<XY, Integer> pills = getClusteredPills(gameState);
         Map<XY, Integer> spaces = getClusteredSpaces(gameState);
 
@@ -36,12 +36,14 @@ public class PillCluster {
         for (XY bp : bonusPills) {
             Collection<SearchNode> bpInfluences = FloodFillInfluence.getInfluence(gameState, bp);
             for (SearchNode node : bpInfluences) {
-                float val = 1 / (float) Math.sqrt(node.runningCost == 0 ? 1f : node.runningCost);
+                float val = falloff(node.runningCost);
                 bonusPillInfluence[node.pos.x][node.pos.y] += val;
             }
         }
 
-        Map<XY, Float> potential = new HashMap<>();
+
+        float[][] cellPotentials = new float[Constants.WIDTH][Constants.HEIGHT];
+        float maxPotential = 0;
         for (int x = 0; x < Constants.WIDTH; x++) {
             for (int y = 0; y < Constants.HEIGHT; y++) {
                 if (numBonusPills > 0) {
@@ -57,14 +59,29 @@ public class PillCluster {
                 }
                 cellPotential /= (float) (maxPillValue + maxSpaceValue);
                 //cellPotential += bonusPillInfluence[x][y];
+                //cellPotential = Math.min(1, cellPotential);
 
-                assert cellPotential >= 0 && cellPotential <= 1.0 : "Potential " + cellPotential + " must be clamped between 0 and 1";
+                //assert cellPotential >= 0 && cellPotential <= 1.0 : "Potential " + cellPotential + " must be clamped between 0 and 1";
 
-                potential.put(pos, cellPotential);
+                if (cellPotential > maxPotential) {
+                    maxPotential = cellPotential;
+                }
+                cellPotentials[x][y] = cellPotential;
             }
         }
 
-        return potential;
+        for (int x = 0; x < Constants.WIDTH; x++) {
+            for (int y = 0; y < Constants.HEIGHT; y++) {
+                cellPotentials[x][y] /= maxPotential;
+            }
+        }
+
+        return cellPotentials;
+    }
+
+    private static float falloff(float dist) {
+        return 1 / (float) Math.pow(dist == 0 ? 1f : dist, 0.5);
+        //return Math.min(1, 1 - dist / (Constants.MAX_MAZE_DIST));
     }
 
     // Run cellular automata to find pills that have neighbors on all sides

@@ -32,5 +32,5 @@ def getA() {
 }
 
 def getB() {
-    return new Mandy()
+    return new Greedy()
 }

@@ -19,6 +19,7 @@ public class Mandy extends BehaviorTreeAgent {
                                         .a(new MoveToTarget())
                                 )
                                 .a(new Selector()
+                                        .a(new MoveToClosestInfluenceBonusPill())
                                         .a(new MoveToClosestBonusPill())
                                         .a(new MoveToHighestPotentialPill(false, numMatches))
                                         .a(new MoveToClosestPill())
