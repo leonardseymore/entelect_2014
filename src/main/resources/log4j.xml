@@ -9,7 +9,7 @@
     </appender>
 
     <category name="za.co.entelect.challenge">
-        <priority value="DEBUG"/>
+        <priority value="INFO"/>
     </category>
 
     <root>

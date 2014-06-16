@@ -121,7 +121,7 @@ public class Draw {
                 g.setColor(Constants.COLOR_MAP.get(c));
                 switch (c) {
                     case Constants.PILL:
-                        Draw.fillRect(g, i, j, 6);
+                        Draw.fillRect(g, i, j, 10);
                         break;
                     case Constants.BONUS_PILL:
                         g.setColor(Color.getHSBColor(Math.min(1f, pulse), 0.22f, 1));

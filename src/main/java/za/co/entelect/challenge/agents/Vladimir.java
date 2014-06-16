@@ -14,7 +14,7 @@ public class Vladimir extends BehaviorTreeAgent {
                                                         .a(new MoveToTarget())
                                         )
                                         .a(new Selector()
-                                                        .a(new MoveToHighestPotential())
+                                                        .a(new MoveToClosestPotentialPill())
                                                         .a(new MoveToClosestPill())
                                         )
                         )

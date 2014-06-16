@@ -15,6 +15,7 @@ public class Mandy extends BehaviorTreeAgent {
                                         )
                                         .a(new Selector()
                                                         .a(new MoveToBiggestClusterYourInfluence())
+                                                        .a(new MoveToClosestPill())
                                         )
                         )
                         .a(new Move())

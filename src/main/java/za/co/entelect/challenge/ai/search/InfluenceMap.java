@@ -3,10 +3,14 @@ package za.co.entelect.challenge.ai.search;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.entelect.challenge.Constants;
+import za.co.entelect.challenge.ai.filters.PillCluster;
 import za.co.entelect.challenge.domain.GameState;
 import za.co.entelect.challenge.domain.XY;
+import za.co.entelect.challenge.swing.Draw;
 
+import java.awt.*;
 import java.util.Collection;
+import java.util.Map;
 
 public class InfluenceMap {
 
@@ -27,6 +31,7 @@ public class InfluenceMap {
     private float[][] oPotentialMap;
     private float[][] potentialYMap;
     private float[][] potentialOMap;
+    private float[][] pillCluster;
     private int[][] frontLine;
     private int[] maxTension;
     private int[] maxVulnerability;
@@ -46,6 +51,7 @@ public class InfluenceMap {
         potentialOMap = new float[w][h];
         potentialMap = new float[w][h];
         tensionMap = new float[w][h];
+        pillCluster = new float[w][h];
         vulnerabilityMap = new float[w][h];
         frontLine = new int[w][h];
         maxTension = new int[2];
@@ -82,6 +88,10 @@ public class InfluenceMap {
 
     public float[][] getPotentialOMap() {
         return potentialOMap;
+    }
+
+    public float[][] getPillCluster() {
+        return pillCluster;
     }
 
     public float getTotalYPotential() {
@@ -124,56 +134,91 @@ public class InfluenceMap {
             for (int i = 0; i < w; i++) {
                 yInfluenceMap[i][j] = 0;
                 oInfluenceMap[i][j] = 0;
-
                 potentialMap[i][j] = 0;
+                pillCluster[i][j] = 0;
             }
         }
+
+        Map<XY, Float> clusteredPills = PillCluster.getCellPotential(gameState);
+        for (Map.Entry<XY, Float> clusteredPill : clusteredPills.entrySet()) {
+            XY pill = clusteredPill.getKey();
+            float val = clusteredPill.getValue();
+            pillCluster[pill.x][pill.y] = val;
+        }
+
         // apply new influence
+        // influence = 1 / sqrt(dist)
         for (char player : new char[]{Constants.PLAYER_A, Constants.PLAYER_B}) {
             XY pos = gameState.getPlayerPos(player);
             Collection<SearchNode> influence = FloodFillInfluence.getInfluence(gameState, pos);
             for (SearchNode node : influence) {
                 if (player == gameState.getCurrentPlayer()) {
-                    yInfluenceMap[node.pos.x][node.pos.y] += 1 / (float) (node.runningCost == 0 ? 1 : node.runningCost);
+                    yInfluenceMap[node.pos.x][node.pos.y] += falloff(node.runningCost);
                 } else {
-                    oInfluenceMap[node.pos.x][node.pos.y] += 1 / (float) (node.runningCost == 0 ? 1 : node.runningCost);
+                    oInfluenceMap[node.pos.x][node.pos.y] += falloff(node.runningCost);
                 }
             }
         }
 
-        float maxPotential = 0;
-        for (SearchNode node : FloodFillPotential.getPotential(gameState)) {
-            potentialMap[node.pos.x][node.pos.y] += (float)node.getProp(FloodFillPotential.POTENTIAL, 0) + 1 / (float) (node.runningCost == 0 ? 1 : node.runningCost);
-            if (potentialMap[node.pos.x][node.pos.y] > maxPotential) {
-                maxPotential = potentialMap[node.pos.x][node.pos.y];
-            }
+        Map<XY, Float> cellPotentials = PillCluster.getCellPotential(gameState);
+        for (Map.Entry<XY, Float> potential : cellPotentials.entrySet()) {
+            XY key = potential.getKey();
+            float val = potential.getValue();
+            int x = key.x;
+            int y = key.y;
+            potentialMap[x][y] += val;
         }
-        if (maxPotential > 0) {
-            for (int j = 0; j < h; j++) {
-                for (int i = 0; i < w; i++) {
-                    potentialMap[i][j] /= maxPotential;
+
+        // calculate and normalize influence maps
+        float influenceYMax = 0;
+        float influenceOMax = 0;
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                influenceYMap[i][j] = yInfluenceMap[i][j] - oInfluenceMap[i][j];
+                if (influenceYMap[i][j] > influenceYMax) {
+                    influenceYMax = influenceYMap[i][j];
+                }
+                influenceOMap[i][j] = oInfluenceMap[i][j] - yInfluenceMap[i][j];
+                if (influenceOMap[i][j] > influenceOMax) {
+                    influenceOMax = influenceOMap[i][j];
                 }
             }
         }
 
-        // calculate influence maps
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                influenceYMap[i][j] /= influenceYMax;
+                influenceOMap[i][j] /= influenceOMax;
+            }
+        }
+
+
         float maxT = 0;
         float maxV = 0;
         totalYPotential = 0;
         totalOPotential = 0;
+        float potentialYMax = 0;
+        float potentialOMax = 0;
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                influenceYMap[i][j] = yInfluenceMap[i][j] - oInfluenceMap[i][j];
-                influenceOMap[i][j] = oInfluenceMap[i][j] - yInfluenceMap[i][j];
+                //influenceYMap[i][j] = yInfluenceMap[i][j] - oInfluenceMap[i][j];
+                //influenceOMap[i][j] = oInfluenceMap[i][j] - yInfluenceMap[i][j];
 
                 yPotentialMap[i][j] = yInfluenceMap[i][j] * potentialMap[i][j];
                 oPotentialMap[i][j] = oInfluenceMap[i][j] * potentialMap[i][j];
-
+                
                 potentialYMap[i][j] = yPotentialMap[i][j] - oPotentialMap[i][j];
+                if (potentialYMap[i][j] > potentialYMax) {
+                    potentialYMax = potentialYMap[i][j];
+                }
+                
                 potentialOMap[i][j] = oPotentialMap[i][j] - yPotentialMap[i][j];
+                if (potentialOMap[i][j] > potentialOMax) {
+                    potentialOMax = potentialOMap[i][j];
+                }
 
-                totalYPotential += potentialYMap[i][j] > 0 ? potentialYMap[i][j] : 0;
-                totalOPotential += potentialOMap[i][j] > 0 ? potentialOMap[i][j] : 0;
+                totalYPotential += yPotentialMap[i][j];
+                totalOPotential += oPotentialMap[i][j];
 
                 float tension = yInfluenceMap[i][j] + oInfluenceMap[i][j];
                 tensionMap[i][j] = tension;
@@ -192,6 +237,13 @@ public class InfluenceMap {
             }
         }
 
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                potentialYMap[i][j] /= potentialYMax;
+                potentialOMap[i][j] /= potentialOMax;
+            }
+        }
+
         for (int j = 1; j < h - 1; j++) {
             for (int i = 1; i < w - 1; i++) {
                 frontLine[i][j] = 0;
@@ -204,6 +256,11 @@ public class InfluenceMap {
             }
         }
         //logger.debug("Influence map generation took [" + (System.currentTimeMillis() - start) + "ms]");
+    }
+
+    private static float falloff(float dist) {
+        //return 1 / (float) Math.pow(dist == 0 ? 1f : dist, 0.1);
+        return Math.min(1, 1 - dist / (Constants.MAX_MAZE_DIST));
     }
 
     public static InfluenceMap forGameState(GameState gameState) {

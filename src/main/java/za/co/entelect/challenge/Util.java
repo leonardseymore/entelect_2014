@@ -227,6 +227,20 @@ public class Util {
         return allPills;
     }
 
+    public static Set<XY> getAllNonPillSpaces(GameState gameState) {
+        Set<XY> spaces = new HashSet<>();
+        char[][] cells = gameState.getCells();
+        for (int x = 0; x < Constants.WIDTH; x++) {
+            for (int y = 0; y < Constants.HEIGHT; y++) {
+                char c = cells[x][y];
+                if (c != Constants.PILL && c != Constants.BONUS_PILL && c != Constants.WALL) {
+                    spaces.add(new XY(x, y));
+                }
+            }
+        }
+        return spaces;
+    }
+
     public static boolean isPillAt(GameState gameState, XY pos) {
         char c = gameState.getCell(pos);
         return c == Constants.PILL || c == Constants.BONUS_PILL;

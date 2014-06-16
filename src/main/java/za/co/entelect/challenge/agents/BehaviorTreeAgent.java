@@ -21,7 +21,7 @@ public class BehaviorTreeAgent extends PacmanAgent {
 
     public BehaviorTreeAgent(Task behaviorTree) {
         this.behaviorTree = behaviorTree;
-        logger.debug("Behavior Tree DOT:\n{}", behaviorTree.toDot(getName()));
+        //logger.debug("Behavior Tree DOT:\n{}", behaviorTree.toDot(getName()));
     }
 
     protected XY getMove(GameState gameState, XY pos) throws NoMoveFoundException {

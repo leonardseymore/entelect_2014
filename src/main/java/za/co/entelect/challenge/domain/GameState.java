@@ -65,6 +65,7 @@ public class GameState implements Cloneable {
 
         this.hash = Util.hashFirstPrincipal(this);
         this.influenceMap = new InfluenceMap();
+        influenceMap.generate(this);
     }
 
     public long getHash() {

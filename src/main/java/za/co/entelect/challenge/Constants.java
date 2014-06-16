@@ -30,6 +30,8 @@ public class Constants {
     public static final XY WARP_A = new XY(0, 10);
     public static final XY WARP_B = new XY(18, 10);
 
+    public static final float MAX_MAZE_DIST = 44;
+
     public static final char WALL = '#';
     public static final char SPACE = ' ';
     public static final char PILL = '.';
@@ -68,6 +70,8 @@ public class Constants {
             }
         }
     }
+
+
 
     public static boolean CAN_STAND_STILL = false;
 

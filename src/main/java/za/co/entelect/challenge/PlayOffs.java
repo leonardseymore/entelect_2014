@@ -26,10 +26,14 @@ public class PlayOffs {
         //AGENTS.add(new Dummie());
         //AGENTS.add(new Eddie());
         AGENTS.add(new Kungus());
-        //AGENTS.add(new Vladimir());
+        AGENTS.add(new Vladimir());
         AGENTS.add(new Angus());
+        AGENTS.add(new Hayw1r3d());
+        AGENTS.add(new Attack());
         //AGENTS.add(new Naratu());
-        AGENTS.add(new Eek());
+        //AGENTS.add(new Eek());
+        //AGENTS.add(new Mandy());
+        //AGENTS.add(new Epa());
     }
 
     private GameState initialGameState;
@@ -57,7 +61,7 @@ public class PlayOffs {
                     rounds[i][j] = -1;
                 } else {
                     String winnerAgent = game.getWinnerAgent();
-                    logger.info("A={},B={},WINNER={}", game.getPlayerAAgentClass(), game.getPlayerBAgentClass(), Util.getWinner(gameState), winnerAgent);
+                    logger.info("A={}({}),B={}({}),WINNER={}", game.getPlayerAAgentClass(), gameState.getPlayerAScore(), game.getPlayerBAgentClass(), gameState.getPlayerBScore(), Util.getWinner(gameState), winnerAgent);
                     if (winners.containsKey(winnerAgent)) {
                         winners.put(winnerAgent, winners.get(winnerAgent) + 1);
                     } else {

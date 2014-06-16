@@ -85,7 +85,7 @@ public class SearchMazeDistance {
     }
 
     protected void testNeighbor(SearchNode node, XY moveTo, Collection<SearchNode> neighbors) {
-        if (!Util.isInBounds(moveTo) || !Util.isWall(moveTo)) {
+        if (!Util.isInBounds(moveTo) || Util.isWall(moveTo)) {
             return;
         }
 

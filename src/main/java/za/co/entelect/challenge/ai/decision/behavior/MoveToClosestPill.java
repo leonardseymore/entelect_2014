@@ -5,6 +5,10 @@ import za.co.entelect.challenge.ai.search.SearchCriteriaFactory;
 public class MoveToClosestPill extends MoveToClosestNodeMatch {
 
     public MoveToClosestPill() {
-        super(SearchCriteriaFactory.nodeIsAnyPill);
+        this(false);
+    }
+
+    public MoveToClosestPill(boolean tactical) {
+        super(SearchCriteriaFactory.nodeIsAnyPill, tactical);
     }
 }

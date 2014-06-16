@@ -1,5 +1,6 @@
 package za.co.entelect.challenge.ai.search;
 
+import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.domain.GameState;
 import za.co.entelect.challenge.domain.XY;
 

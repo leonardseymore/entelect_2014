@@ -12,10 +12,10 @@ public class InfluenceMapRenderer {
 
     public static final Logger logger = Logger.getLogger(InfluenceMapRenderer.class);
 
-    private static final float MULTIPLIER = 5f;
+    private static final float MULTIPLIER = 1f;
 
     private enum InfluenceMapType {
-        COMBINED, YINFLUENCE, YREACHABLE, OREACHABLE, OINFLUENCE, INFLUENCEY, INFLUENCEO, TENSION, VULNERABILITY, POTENTIALY, POTENTIALO
+        COMBINED, YINFLUENCE, YREACHABLE, OREACHABLE, OINFLUENCE, INFLUENCEY, INFLUENCEO, TENSION, VULNERABILITY, POTENTIALY, POTENTIALO, PILL_CLUSTER
     }
 
     private InfluenceMapType mapType = InfluenceMapType.COMBINED;
@@ -51,6 +51,9 @@ public class InfluenceMapRenderer {
         }
         if (keyboard.keyDownOnce(KeyEvent.VK_8)) {
             mapType = InfluenceMapType.POTENTIALO;
+        }
+        if (keyboard.keyDownOnce(KeyEvent.VK_9)) {
+            mapType = InfluenceMapType.PILL_CLUSTER;
         }
 
         //g.setColor(Constants.COLOR_SWING_BOARD);
@@ -134,6 +137,15 @@ public class InfluenceMapRenderer {
                             color = Color.getHSBColor(0.66f, 1, Math.min(1f, val));
                         } else if (val < 0) {
                             color = Color.getHSBColor(1f, 1, Math.min(1f, Math.abs(val)));
+                        }
+                        break;
+                    case PILL_CLUSTER:
+                        float[][] pillCluster = imap.getPillCluster();
+                        val = pillCluster[x][y] * MULTIPLIER;
+                        if (val > 0) {
+                            color = Color.getHSBColor(0.5f, 0.5f, Math.min(1f, val));
+                        } else {
+                            color = Color.getHSBColor(1f, 0.5f, Math.min(1f, Math.abs(val)));
                         }
                         break;
                     default:

@@ -239,7 +239,9 @@ public class GUI extends JFrame implements Runnable {
         if (renderInfluenceMap) {
             influenceMapRenderer.render(g, gameState);
         }
+        //pillClusterRenderer.render(g, gameState);
         Draw.drawMaze(g, gameState, pulse, phase);
+
         XY pos = gameState.getCurrentPosition();
         Color c = gameState.getCurrentPlayer() == Constants.PLAYER_A ? Constants.PLAYER_A_COLOR : Constants.PLAYER_B_COLOR;
         int strobe = Math.min((int) (pulse * 10), 5);
@@ -281,11 +283,5 @@ public class GUI extends JFrame implements Runnable {
             g.setColor(Color.red);
             Draw.drawCross(g, nextMove.x, nextMove.y);
         }
-
-//        Set<XY> clusteredPills = PillCluster.getClusteredPills(gameState, 2);
-//        g.setColor(Constants.CLUSTER_PILL_COLOR);
-//        for (XY clusteredPill : clusteredPills) {
-//            Draw.fillRect(g, clusteredPill.x, clusteredPill.y, 0);
-//        }
     }
 }

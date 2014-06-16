@@ -22,6 +22,14 @@ public abstract class Search {
     public static Stack<SearchNode> bfs(GameState gameState, XY pos, SearchCriteria criteria) {
         return searchBfs.search(gameState, pos, criteria);
     }
+    public static Stack<SearchNode> bfs(GameState gameState, XY pos, SearchCriteria criteria, int numMatches) {
+        return searchBfs.search(gameState, pos, criteria, numMatches);
+    }
+
+    private static final SearchTactical searchTactical = new SearchTactical();
+    public static Stack<SearchNode> tactical(GameState gameState, XY pos, XY target) {
+        return searchTactical.search(gameState, pos, target);
+    }
 
     public static TestNeighbor DEFAULT_TEST_NEIGHBOR = new TestNeighbor();
 
