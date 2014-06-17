@@ -12,7 +12,10 @@ import za.co.entelect.challenge.domain.XY;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Map;
@@ -26,8 +29,8 @@ public class GUI extends JFrame implements Runnable {
     public static final int DEFAULT_HEIGHT = 570;
 
     private Game game;
-    private Canvas canvas;
     private boolean printHelp;
+    private boolean fullScreen;
 
     private Keyboard keyboard;
     private Mouse mouse;
@@ -49,32 +52,39 @@ public class GUI extends JFrame implements Runnable {
 
     private boolean renderInfluenceMap = false;
 
+    private float scaleX = 1f;
+    private float scaleY = 1f;
+
+    private static GraphicsDevice device;
+
     private InfluenceMapRenderer influenceMapRenderer = new InfluenceMapRenderer();
 
     public GUI(Game game) {
         this.game = game;
+        fullScreen = false;
+        device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
         restart();
 
         setIgnoreRepaint(true);
         setTitle(Constants.APP_TITLE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-        canvas = new Canvas();
-        canvas.setIgnoreRepaint(true);
-        canvas.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        add(canvas);
         pack();
 
         keyboard = Keyboard.getInstance();
         addKeyListener(keyboard);
-        canvas.addKeyListener(keyboard);
 
-        Mouse.init(canvas, 1);
+        Mouse.init(this, 1);
         mouse = Mouse.getInstance();
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
-        canvas.addMouseListener(mouse);
-        canvas.addMouseMotionListener(mouse);
+
+        this.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                scaleX = getWidth() / (float) DEFAULT_WIDTH;
+                scaleY = getHeight() / (float) DEFAULT_HEIGHT;
+            }
+        });
     }
 
     private void restart() {
@@ -87,13 +97,12 @@ public class GUI extends JFrame implements Runnable {
     }
 
     public void run() {
-        canvas.createBufferStrategy(2);
+        createBufferStrategy(2);
 
-        BufferStrategy buffer = canvas.getBufferStrategy();
+        BufferStrategy buffer = getBufferStrategy();
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         GraphicsConfiguration gc = gd.getDefaultConfiguration();
-        BufferedImage bi = gc.createCompatibleImage(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
         Graphics graphics = null;
         Graphics2D g = null;
@@ -125,6 +134,7 @@ public class GUI extends JFrame implements Runnable {
                 if (keyboard.keyDownOnce(KeyEvent.VK_A)) {
                     game.getCurrentPlayerAgent().reset();
                     game.swapPlayerAgents();
+                    game.getCurrentPlayerAgent().reset();
                 }
                 if (keyboard.keyDownOnce(KeyEvent.VK_E)) {
                     game.getCurrentPlayerAgent().reset();
@@ -164,6 +174,14 @@ public class GUI extends JFrame implements Runnable {
                         lastUpdate = System.currentTimeMillis();
                     }
                 }
+                if (keyboard.keyDownOnce(KeyEvent.VK_ESCAPE)) {
+                    fullScreen = !fullScreen;
+                    if (fullScreen) {
+                        device.setFullScreenWindow(this);
+                    } else {
+                        device.setFullScreenWindow(null);
+                    }
+                }
                 if (!paused) {
                     if (System.currentTimeMillis() - lastUpdate > frameSleep * frameSleepMultiplier) {
                         game.update();
@@ -171,12 +189,16 @@ public class GUI extends JFrame implements Runnable {
                     }
                 }
 
+                BufferedImage bi = gc.createCompatibleImage(getWidth(), getHeight());
                 g = bi.createGraphics();
                 g.setFont(arial);
 
+                AffineTransform t = g.getTransform();
+                g.translate(10, 25);
+                g.scale(scaleX, scaleY);
+
                 g.setColor(Constants.COLOR_SWING_BLANK);
                 g.fillRect(0, 0, getWidth(), getHeight());
-
 
                 GameState gameState = game.getGameState();
                 renderMaze(g, gameState);
