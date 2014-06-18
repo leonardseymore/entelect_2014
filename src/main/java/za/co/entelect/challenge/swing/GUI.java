@@ -36,6 +36,7 @@ public class GUI extends JFrame implements Runnable {
     private Mouse mouse;
     private boolean paused = true;
     private boolean showNames = true;
+    private boolean drawDebugInfo = false;
 
     private Font arial = new Font("Arial", Font.BOLD, 10);
     private Font bigArial = new Font("Courier New", Font.BOLD, 16);
@@ -154,6 +155,9 @@ public class GUI extends JFrame implements Runnable {
                 if (keyboard.keyDownOnce(KeyEvent.VK_D)) {
                     Util.writeTmpMaze(game.getGameState());
                 }
+                if (keyboard.keyDownOnce(KeyEvent.VK_X)) {
+                    drawDebugInfo = !drawDebugInfo;
+                }
                 if (keyboard.keyDownOnce(KeyEvent.VK_R)) {
                     restart();
                 }
@@ -233,7 +237,7 @@ public class GUI extends JFrame implements Runnable {
 
                     int x = 10;
                     int y = 10;
-                    g.drawString("p=pause, r=restart, d=dump, i=influence, w=names", x, y += 12);
+                    g.drawString("p=pause, r=restart, d=dump, x=debug, i=influence, w=names", x, y += 12);
                     if (renderInfluenceMap) {
                         g.drawString("0=c,1=yi,2=oi,3=iy,4=io,5=t,6=v,7=yp,8=op", x, y += 12);
                         float yp = gameState.getInfluenceMap().getTotalYPotential();
@@ -302,20 +306,23 @@ public class GUI extends JFrame implements Runnable {
             Draw.drawString(g, b.x, b.y, game.getPlayerBAgentClass(), 0, -2);
         }
 
-        XY nextMove = null;
-        if (!gameState.isGameOver()) {
-            try {
-                nextMove = game.getCurrentPlayerAgent().peekNextMove(gameState, gameState.getCurrentPosition());
-            } catch (NoMoveFoundException ex) {
-                logger.error("Problem peeking at next move", ex);
-                game.getGameState().setGameOver(true);
+        if (drawDebugInfo) {
+            XY nextMove = null;
+            if (!gameState.isGameOver()) {
+                try {
+                    nextMove = game.getCurrentPlayerAgent().peekNextMove(gameState, gameState.getCurrentPosition());
+                } catch (NoMoveFoundException ex) {
+                    logger.error("Problem peeking at next move", ex);
+                    game.getGameState().setGameOver(true);
+                }
             }
-        }
-        game.getCurrentPlayerAgent().drawDebugInfo(g, gameState, gameState.getCurrentPosition());
 
-        if (nextMove != null) {
-            g.setColor(Color.red);
-            Draw.drawCross(g, nextMove.x, nextMove.y);
+            game.getCurrentPlayerAgent().drawDebugInfo(g, gameState, gameState.getCurrentPosition());
+
+            if (nextMove != null) {
+                g.setColor(Color.red);
+                Draw.drawCross(g, nextMove.x, nextMove.y);
+            }
         }
     }
 }
