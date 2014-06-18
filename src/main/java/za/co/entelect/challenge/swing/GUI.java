@@ -25,8 +25,8 @@ public class GUI extends JFrame implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(GUI.class);
 
-    public static final int DEFAULT_WIDTH = 475;
-    public static final int DEFAULT_HEIGHT = 570;
+    public static final int DEFAULT_WIDTH = Constants.ZOOM_LEVEL * Constants.WIDTH;
+    public static final int DEFAULT_HEIGHT = Constants.ZOOM_LEVEL * Constants.HEIGHT;
 
     private Game game;
     private boolean printHelp;
@@ -81,8 +81,17 @@ public class GUI extends JFrame implements Runnable {
 
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
-                scaleX = getWidth() / (float) DEFAULT_WIDTH;
-                scaleY = getHeight() / (float) DEFAULT_HEIGHT;
+                int width = getWidth();
+                int height = getHeight();
+                Insets insets = getInsets();
+                if (!fullScreen) {
+                    width -= insets.left;
+                    width -= insets.right;
+                    height -= insets.top;
+                    height -= insets.bottom;
+                }
+                scaleX = width / (float) DEFAULT_WIDTH;
+                scaleY = height / (float) DEFAULT_HEIGHT;
             }
         });
     }
@@ -189,16 +198,19 @@ public class GUI extends JFrame implements Runnable {
                     }
                 }
 
+                Insets insets = getInsets();
                 BufferedImage bi = gc.createCompatibleImage(getWidth(), getHeight());
                 g = bi.createGraphics();
                 g.setFont(arial);
 
                 AffineTransform t = g.getTransform();
-                g.translate(10, 25);
+                if (!fullScreen) {
+                    g.translate(insets.left, insets.top);
+                }
                 g.scale(scaleX, scaleY);
 
                 g.setColor(Constants.COLOR_SWING_BLANK);
-                g.fillRect(0, 0, getWidth(), getHeight());
+                g.fillRect(0, 0, getWidth() - insets.right - insets.left, getHeight());
 
                 GameState gameState = game.getGameState();
                 renderMaze(g, gameState);
