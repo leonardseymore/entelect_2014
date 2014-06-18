@@ -124,18 +124,23 @@ public class GameFactory {
     public static void writeMaze(String filePath, GameState gameState) {
         try {
             PrintWriter writer = new PrintWriter(filePath);
-            String output = "";
-            for (int x = 0; x < Constants.HEIGHT; x++) {
-                for (int y = 0; y < Constants.WIDTH; y++) {
-                    output += gameState.getCell(new XY(y, x));
-                }
-                if (x != Constants.HEIGHT - 1) output += ('\n');
-            }
+            String output = gameStateToString(gameState);
             writer.print(output);
             writer.close();
             logger.debug("Maze written to {}", filePath);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static String gameStateToString(GameState gameState) {
+        String output = "";
+        for (int x = 0; x < Constants.HEIGHT; x++) {
+            for (int y = 0; y < Constants.WIDTH; y++) {
+                output += gameState.getCell(new XY(y, x));
+            }
+            if (x != Constants.HEIGHT - 1) output += ('\n');
+        }
+        return output;
     }
 }
