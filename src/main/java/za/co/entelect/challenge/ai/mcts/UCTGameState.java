@@ -1,5 +1,6 @@
 package za.co.entelect.challenge.ai.mcts;
 
+import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.domain.XY;
 
 import java.util.*;
@@ -105,9 +106,11 @@ public class UCTGameState implements Cloneable {
             if (currentPlayer == A) {
                 ascore += scoreAdjust;
                 weightedAscore += scoreAdjust * 1 / (float)Math.sqrt(depth + 1);
+                weightedAscore -= 1/(float)Math.sqrt(Util.mazeDistance(opos, move));
             } else {
                 bscore += scoreAdjust;
                 weightedBscore += scoreAdjust * 1 / (float)Math.sqrt(depth + 1);
+                weightedBscore -= 1/(float)Math.sqrt(Util.mazeDistance(ypos, move));
             }
         }
 
