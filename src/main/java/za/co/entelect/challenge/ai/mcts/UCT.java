@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.domain.GameState;
+import za.co.entelect.challenge.domain.XY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -44,7 +45,26 @@ public class UCT {
         return instance;
     }
 
-    public UCTPos uct(UCTGameState rootstate, int iterations, long timeout, boolean parallel, boolean verbose, float heuristic) {
+    public static UCTGameState convert(GameState gameState) {
+        byte[] board = new byte[UCTGameState.SIZE];
+        Arrays.fill(board, (byte)0);
+        char[][] cells = gameState.getCells();
+
+        for (int x = 0; x < UCTGameState.WIDTH; x++) {
+            for (int y = 0; y < UCTGameState.HEIGHT; y++) {
+                board[x * UCTGameState.HEIGHT + y] = (byte)cells[x][y];
+            }
+        }
+
+        XY ypos = new XY(gameState.getCurrentPosition().x, gameState.getCurrentPosition().y);
+        XY opos = new XY(gameState.getOpponentPosition().x, gameState.getOpponentPosition().y);
+        short scoreLeft = (short)gameState.getScoreLeft();
+
+        UCTGameState uctGameState = new UCTGameState(board, ypos, opos, (short)gameState.getPlayerAScore(), (short)gameState.getPlayerBScore(), (byte)gameState.getCurrentPlayer(), scoreLeft);
+        return uctGameState;
+    }
+
+    public XY uct(UCTGameState rootstate, int iterations, long timeout, boolean parallel, boolean verbose, float heuristic) {
         long start = System.currentTimeMillis();
         UCTNode rootnode = new UCTNode(rootstate, heuristic);
 
@@ -88,7 +108,7 @@ public class UCT {
 
             // Expand
             if (node.hasUntriedMoves()) {
-                UCTPos move = node.getRandomUntriedMove();
+                XY move = node.getRandomUntriedMove();
                 state.doMove(move);
                 node = node.addChild(move, state);
             }
@@ -98,7 +118,7 @@ public class UCT {
 //        final Timer.Context timerContext = rolloutTimer.time();
 //        try {
             while (state.hasMoves()) {
-                UCTPos move = state.getRandomMove();
+                XY move = state.getRandomMove();
                 state.doMove(move);
                 //logger.debug("{} -> \n{}", move, state.toAscii());
             }
@@ -109,12 +129,12 @@ public class UCT {
 
         // Backpropagate
         while (node != null) {
-            UCTPos move = node.move;
+            XY move = node.move;
             if (move == null) {
                 break;
             }
             numPlayouts[move.x * Constants.HEIGHT + move.y]++;
-            float result = state.getResult(node.playerJustMoved);
+            float result = state.getResult(node.currentPlayer);
             if (result == 1.0f) {
                 wonPlayouts[move.x * Constants.HEIGHT + move.y]++;
             }

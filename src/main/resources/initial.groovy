@@ -28,9 +28,9 @@ def getMap() {
 }
 
 def getA() {
-  return new Hayw1r3d()
+  return new Eek()
 }
 
 def getB() {
-    return new Greedy()
+    return new Hayw1r3d()
 }

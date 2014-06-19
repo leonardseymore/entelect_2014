@@ -1,5 +1,6 @@
 package za.co.entelect.challenge.agents;
 
+import za.co.entelect.challenge.AIProps;
 import za.co.entelect.challenge.ai.decision.behavior.*;
 
 public class Eek extends BehaviorTreeAgent {
@@ -9,19 +10,11 @@ public class Eek extends BehaviorTreeAgent {
                 new Sequence()
                         .a(new Selector()
                                 .a(new Sequence()
-                                        .a(new CanEatOpponent())
-                                        .a(new ShouldEatOpponent())
-                                        .a(new MoveToTarget())
-                                )
-                                .a(new Sequence()
-                                        .a(new IsAnyPillCloserThan(8))
-                                        .a(new IsOpponentCloserThan(8))
-                                        .a(new GuessBestMoveMinimax(18))
+                                        .a(new GuessBestMoveBfs(12))
                                         .a(new MoveToTarget())
                                 )
                                 .a(new Selector()
-                                        .a(new MoveToClosestBonusPill())
-                                        .a(new MoveToClosestInfluencePill())
+                                        .a(new MoveToHighestPotentialPill(false, AIProps.DEPTH_HIGHEST_POTENTIAL_PILL))
                                         .a(new MoveToClosestPill())
                                 )
                         )

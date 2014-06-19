@@ -1,7 +1,10 @@
 package za.co.entelect.challenge.ai.mcts;
 
+import za.co.entelect.challenge.domain.XY;
+
 import java.util.*;
 import static za.co.entelect.challenge.Util.R;
+import static za.co.entelect.challenge.Util.clone;
 
 public class UCTGameState implements Cloneable {
 
@@ -20,46 +23,53 @@ public class UCTGameState implements Cloneable {
     public static byte P_SCORE = 1;
     public static byte BP_SCORE = 10;
 
-    public static final UCTPos PORTAL = new UCTPos(9, 10);
-    public static final UCTPos WARP_A = new UCTPos(0, 10);
-    public static final UCTPos WARP_B = new UCTPos(18, 10);
+    public static final XY PORTAL = new XY(9, 10);
+    public static final XY WARP_A = new XY(0, 10);
+    public static final XY WARP_B = new XY(18, 10);
 
-    public static final Set<UCTPos> SPAWN_ZONE = new HashSet<>();
+    public static final Set<XY> SPAWN_ZONE = new HashSet<>();
     static {
-        SPAWN_ZONE.add(new UCTPos(9, 9));
-        SPAWN_ZONE.add(new UCTPos(8, 10));
-        SPAWN_ZONE.add(new UCTPos(9, 10));
-        SPAWN_ZONE.add(new UCTPos(10, 10));
-        SPAWN_ZONE.add(new UCTPos(9, 11));
+        SPAWN_ZONE.add(new XY(9, 9));
+        SPAWN_ZONE.add(new XY(8, 10));
+        SPAWN_ZONE.add(new XY(9, 10));
+        SPAWN_ZONE.add(new XY(10, 10));
+        SPAWN_ZONE.add(new XY(9, 11));
     }
 
-    byte playerJustMoved = B;
+    byte currentPlayer;
     byte[] board;
     short ascore;
     short bscore;
     short scoreLeft;
-    UCTPos ypos;
-    UCTPos opos;
+    XY ypos;
+    XY opos;
+    float weightedAscore;
+    float weightedBscore;
 
-    private List<UCTPos> moves;
+    private List<XY> moves;
 
     UCTGameState() {
 
     }
 
-    public UCTGameState(byte[] board, UCTPos ypos, UCTPos opos, short scoreLeft) {
+    public UCTGameState(byte[] board, XY ypos, XY opos, short ascore, short bscore, byte currentPlayer, short scoreLeft) {
         this.board = board;
         this.ypos = ypos;
         this.opos = opos;
+        this.ascore = ascore;
+        this.bscore = bscore;
+        this.currentPlayer = currentPlayer;
         this.scoreLeft = scoreLeft;
         loadMoves();
     }
 
     public UCTGameState clone() {
         UCTGameState clone = new UCTGameState();
-        clone.playerJustMoved = playerJustMoved;
+        clone.currentPlayer = currentPlayer;
         clone.ascore = ascore;
         clone.bscore = bscore;
+        clone.weightedAscore = weightedAscore;
+        clone.weightedBscore = weightedBscore;
         clone.ypos = ypos;
         clone.opos = opos;
         clone.scoreLeft = scoreLeft;
@@ -69,12 +79,18 @@ public class UCTGameState implements Cloneable {
         return clone;
     }
 
-    public void doMove(UCTPos move) {
+    public static byte getOtherPlayer(byte player) {
+        return (byte) (131 - player);
+    }
+
+    public void doMove(XY move) {
+        doMove(move, true, 0);
+    }
+
+    public void doMove(XY move, boolean swapPlayers, int depth) {
         assert canMoveTo(move) : "Invalid move";
 
-        byte otherPlayer = playerJustMoved;
-        playerJustMoved = (byte) (131 - playerJustMoved);
-        assert playerJustMoved == A || playerJustMoved == B : "Player is no longer valid";
+        byte otherPlayer = getOtherPlayer(currentPlayer);
 
         byte moveVal = getCell(move);
         byte scoreAdjust = 0;
@@ -86,33 +102,40 @@ public class UCTGameState implements Cloneable {
 
         if (scoreAdjust > 0) {
             scoreLeft -= scoreAdjust;
-            if (playerJustMoved == A) {
+            if (currentPlayer == A) {
                 ascore += scoreAdjust;
+                weightedAscore += scoreAdjust * 1 / (float)Math.sqrt(depth + 1);
             } else {
                 bscore += scoreAdjust;
+                weightedBscore += scoreAdjust * 1 / (float)Math.sqrt(depth + 1);
             }
         }
 
         if (isPoisonPill(move)) {
             setCell(ypos, S);
             setCell(move, S);
-            setCell(PORTAL, playerJustMoved);
+            setCell(PORTAL, currentPlayer);
             ypos = PORTAL;
         } else if (opos.equals(move)) {
             setCell(ypos, S);
-            setCell(move, playerJustMoved);
+            setCell(move, currentPlayer);
             setCell(PORTAL, otherPlayer);
             opos = PORTAL;
             ypos = move;
         } else {
             setCell(ypos, S);
-            setCell(move, playerJustMoved);
+            setCell(move, currentPlayer);
             ypos = move;
         }
 
         // swap positions for next round
-        ypos = opos;
-        opos = move;
+        if (swapPlayers) {
+            ypos = opos;
+            opos = move;
+
+            currentPlayer = (byte) (131 - currentPlayer);
+            assert currentPlayer == A || currentPlayer == B : "Player is no longer valid";
+        }
 
         loadMoves();
     }
@@ -121,34 +144,58 @@ public class UCTGameState implements Cloneable {
         return moves.size() > 0 && scoreLeft > 0;
     }
 
-    public UCTPos getRandomMove() {
+    public XY getRandomMove() {
         return moves.get(R.nextInt(moves.size()));
     }
 
-    public List<UCTPos> getMoves() {
+    public List<XY> getMoves() {
         return moves;
     }
 
+    public byte[] getBoard() {
+        return board;
+    }
+
+    public short getAscore() {
+        return ascore;
+    }
+
+    public short getBscore() {
+        return bscore;
+    }
+
+    public short getScoreLeft() {
+        return scoreLeft;
+    }
+
+    public XY getYpos() {
+        return ypos;
+    }
+
+    public XY getOpos() {
+        return opos;
+    }
+
     private void loadMoves() {
-        UCTPos moveTo = ypos;
+        XY moveTo = ypos;
         if (isPoisonPill(moveTo)) {
             moveTo = PORTAL;
         }
 
         moves = new ArrayList<>();
         if (isWarp(moveTo)) {
-            for (UCTPos xy : getWarpNeighbors(moveTo)) {
+            for (XY xy : getWarpNeighbors(moveTo)) {
                 testNeighbor(xy, moves);
             }
         } else {
-            testNeighbor(new UCTPos(moveTo.x, moveTo.y - 1), moves);
-            testNeighbor(new UCTPos(moveTo.x + 1, moveTo.y), moves);
-            testNeighbor(new UCTPos(moveTo.x, moveTo.y + 1), moves);
-            testNeighbor(new UCTPos(moveTo.x - 1, moveTo.y), moves);
+            testNeighbor(new XY(moveTo.x, moveTo.y - 1), moves);
+            testNeighbor(new XY(moveTo.x + 1, moveTo.y), moves);
+            testNeighbor(new XY(moveTo.x, moveTo.y + 1), moves);
+            testNeighbor(new XY(moveTo.x - 1, moveTo.y), moves);
         }
     }
 
-    public void testNeighbor(UCTPos moveTo, Collection<UCTPos> moves) {
+    public void testNeighbor(XY moveTo, Collection<XY> moves) {
         if (!isInBounds(moveTo) || !canMoveTo(moveTo)) {
             return;
         }
@@ -165,43 +212,71 @@ public class UCTGameState implements Cloneable {
         }
     }
 
-    public boolean isInBounds(UCTPos pos) {
+    public int getPlayerScore(byte player) {
+        if (player == A) {
+            return ascore;
+        } else {
+            return bscore;
+        }
+    }
+
+    public float getWeightedScore(byte player) {
+        if (player == A) {
+            return weightedAscore;
+        } else {
+            return weightedBscore;
+        }
+    }
+
+    public boolean isInBounds(XY pos) {
         return pos.x >= 0 && pos.x < WIDTH && pos.y >= 0 && pos.y < HEIGHT;
     }
 
-    public boolean isPoisonPill(UCTPos pos) {
+    public boolean isPoisonPill(XY pos) {
         return getCell(pos) == PP;
     }
 
-    public boolean isWall(UCTPos pos) {
+    public boolean isWall(XY pos) {
         return getCell(pos) == W;
     }
 
-    public byte getCell(UCTPos pos) {
+    public byte getCell(XY pos) {
         return board[pos.x * HEIGHT + pos.y];
     }
 
-    public void setCell(UCTPos pos, byte value) {
+    public void setCell(XY pos, byte value) {
         board[pos.x * HEIGHT + pos.y] = value;
     }
 
-    public boolean isWarp(UCTPos pos) {
+    public boolean isWarp(XY pos) {
         return pos.equals(WARP_A) || pos.equals(WARP_B);
     }
 
-    public Collection<UCTPos> getWarpNeighbors(UCTPos pos) {
-        Set<UCTPos> neighbors = new HashSet<>();
+    public boolean isGameOver() {
+        return scoreLeft == 0;
+    }
+
+    public XY getCurrentPosition() {
+        if (currentPlayer == A) {
+            return ypos;
+        } else {
+            return opos;
+        }
+    }
+
+    public Collection<XY> getWarpNeighbors(XY pos) {
+        Set<XY> neighbors = new HashSet<>();
         if (pos.equals(WARP_A)) {
             neighbors.add(WARP_B);
-            neighbors.add(new UCTPos(pos.x + 1, pos.y));
+            neighbors.add(new XY(pos.x + 1, pos.y));
         } else if (pos.equals(WARP_B)) {
             neighbors.add(WARP_A);
-            neighbors.add(new UCTPos(pos.x - 1, pos.y));
+            neighbors.add(new XY(pos.x - 1, pos.y));
         }
         return neighbors;
     }
 
-    public boolean canMoveTo(UCTPos moveTo) {
+    public boolean canMoveTo(XY moveTo) {
         boolean isWall = isWall(moveTo);
 
         if (inSpawnZone(ypos)) {
@@ -213,7 +288,7 @@ public class UCTGameState implements Cloneable {
         }
     }
 
-    public boolean inSpawnZone(UCTPos point) {
+    public boolean inSpawnZone(XY point) {
         return SPAWN_ZONE.contains(point);
     }
 

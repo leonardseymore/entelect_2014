@@ -10,33 +10,11 @@ public class SearchNode implements Comparable<SearchNode> {
     public XY pos;
     public int goalCost;
     public float runningCost;
-    public Map<String, Object> properties;
 
     public SearchNode parent;
 
     public SearchNode(XY pos) {
         this.pos = pos;
-    }
-
-    public void setProp(String key, Object value) {
-        if (properties == null) {
-            properties = new HashMap<>();
-        }
-        properties.put(key, value);
-    }
-
-    public Object getProp(String key) {
-        if (properties == null) {
-            return null;
-        }
-        return properties.get(key);
-    }
-
-    public Object getProp(String key, Object defaultValue) {
-        if (properties == null) {
-            return defaultValue;
-        }
-        return properties.get(key);
     }
 
     @Override
