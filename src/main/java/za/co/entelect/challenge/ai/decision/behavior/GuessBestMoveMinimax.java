@@ -3,7 +3,10 @@ package za.co.entelect.challenge.ai.decision.behavior;
 
 import za.co.entelect.challenge.agents.PacmanAgent;
 import za.co.entelect.challenge.ai.blackboard.Blackboard;
+import za.co.entelect.challenge.ai.gametree.GameTreeBfs;
 import za.co.entelect.challenge.ai.gametree.GameTreeSearch;
+import za.co.entelect.challenge.ai.mcts.UCT;
+import za.co.entelect.challenge.ai.mcts.UCTGameState;
 import za.co.entelect.challenge.domain.GameState;
 import za.co.entelect.challenge.domain.XY;
 
@@ -17,6 +20,7 @@ public class GuessBestMoveMinimax extends Task {
 
     public boolean run(PacmanAgent pacmanAgent, GameState gameState) {
         Blackboard blackboard = pacmanAgent.getBlackboard();
+
         XY move = GameTreeSearch.minimax(gameState, gameState.getCurrentPlayer(), maxDepth);
         if (move == null) {
             return false;

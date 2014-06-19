@@ -2,6 +2,8 @@ package za.co.entelect.challenge.ai.gametree;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.entelect.challenge.ai.mcts.UCT;
+import za.co.entelect.challenge.ai.mcts.UCTGameState;
 import za.co.entelect.challenge.domain.GameState;
 import za.co.entelect.challenge.domain.XY;
 
@@ -22,6 +24,12 @@ public class GameTreeSearch {
     private static GameTreeMt gameTreeMt = new GameTreeMt();
     public static XY mtdf(GameState gameState, int maxDepth, long timeout) {
         return gameTreeMt.mtdf(gameState, maxDepth, timeout);
+    }
+
+    private static GameTreeBfs gameTreeBfs = new GameTreeBfs();
+    public static XY bfs(GameState gameState, char player, int maxDepth) {
+        UCTGameState uctGameState = UCT.convert(gameState);
+        return gameTreeBfs.bfs(uctGameState, player, maxDepth);
     }
 
 }

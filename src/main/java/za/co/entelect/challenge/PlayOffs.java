@@ -31,7 +31,7 @@ public class PlayOffs {
         AGENTS.add(new Hayw1r3d());
         AGENTS.add(new Attack());
         //AGENTS.add(new Naratu());
-        //AGENTS.add(new Eek());
+        AGENTS.add(new Eek());
         //AGENTS.add(new Mandy());
         //AGENTS.add(new Epa());
     }

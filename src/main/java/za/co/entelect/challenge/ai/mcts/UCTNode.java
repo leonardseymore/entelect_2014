@@ -1,6 +1,7 @@
 package za.co.entelect.challenge.ai.mcts;
 
 import za.co.entelect.challenge.Constants;
+import za.co.entelect.challenge.domain.XY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,11 @@ import static za.co.entelect.challenge.Util.R;
 public class UCTNode {
 
     float heuristic;
-    UCTPos move;
+    XY move;
     UCTNode parentNode;
     List<UCTNode> children;
-    List<UCTPos> untriedMoves;
-    byte playerJustMoved;
+    List<XY> untriedMoves;
+    byte currentPlayer;
     float score;
     short visits;
     float mean;
@@ -23,14 +24,14 @@ public class UCTNode {
         this(null, null, state, heuristic);
     }
 
-    public UCTNode(UCTPos move, UCTNode parent, UCTGameState state, float heuristic) {
+    public UCTNode(XY move, UCTNode parent, UCTGameState state, float heuristic) {
         this.move = move;
         this.parentNode = parent;
         this.children = new ArrayList<>();
         this.score = 0;
         this.visits = 1;
         this.untriedMoves = state.getMoves();
-        this.playerJustMoved = state.playerJustMoved;
+        this.currentPlayer = state.currentPlayer;
         this.heuristic = heuristic;
     }
 
@@ -38,7 +39,7 @@ public class UCTNode {
         UCTNode selected = null;
         double bestValue = Double.NEGATIVE_INFINITY;
         for (UCTNode c : children) {
-            UCTPos move = c.move;
+            XY move = c.move;
             double uctValue = ucb(this, c, numPlayouts[move.x * Constants.HEIGHT + move.y], wonPlayouts[move.x * Constants.HEIGHT + move.y]);
 
             if (uctValue > bestValue) {
@@ -62,7 +63,7 @@ public class UCTNode {
         return untriedMoves.size() > 0;
     }
 
-    public UCTPos getRandomUntriedMove() {
+    public XY getRandomUntriedMove() {
         return untriedMoves.get(R.nextInt(untriedMoves.size()));
     }
 
@@ -70,7 +71,7 @@ public class UCTNode {
         return children.size() > 0;
     }
 
-    public UCTNode addChild(UCTPos move, UCTGameState state) {
+    public UCTNode addChild(XY move, UCTGameState state) {
         UCTNode n = new UCTNode(move, this, state, heuristic);
         untriedMoves.remove(move);
         children.add(n);
