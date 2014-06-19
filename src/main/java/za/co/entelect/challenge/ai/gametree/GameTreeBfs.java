@@ -13,23 +13,24 @@ public class GameTreeBfs {
     private static final Logger logger = LoggerFactory.getLogger(GameTreeBfs.class);
 
     public XY bfs(UCTGameState gameState, char player, int maxDepth) {
-        GameTreeResultBfs result = bfs(gameState, player, maxDepth, 0, 0);
+        GameTreeResultBfs result = bfs(gameState, player, maxDepth, 0);
         return result.move;
     }
 
-    public GameTreeResultBfs bfs(UCTGameState gameState, char player, int maxDepth, int currentDepth, float gamma) {
+    public GameTreeResultBfs bfs(UCTGameState gameState, char player, int maxDepth, int currentDepth) {
         if (gameState.isGameOver() || currentDepth == maxDepth) {
             return new GameTreeResultBfs(evaluate(gameState, player), null);
         }
 
         List<XY> moves = gameState.getMoves();
-       // gamma = 0;
+        float gamma = 0;
         XY move = null;
         for (XY neighbor : moves) {
             UCTGameState gameStateAfterMove = gameState.clone();
             gameStateAfterMove.doMove(neighbor, false, currentDepth);
 
-            GameTreeResultBfs recurse = bfs(gameStateAfterMove, player, maxDepth, currentDepth + 1, gamma);
+            GameTreeResultBfs recurse = bfs(gameStateAfterMove, player, maxDepth, currentDepth + 1);
+            //logger.debug("{}|{}{}{}", String.format("%" + (currentDepth + 1) + "s", ""), currentDepth, neighbor, recurse.score);
             if (recurse.score > gamma) {
                 gamma = recurse.score;
                 move = neighbor;

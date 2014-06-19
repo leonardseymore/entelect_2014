@@ -106,11 +106,11 @@ public class UCTGameState implements Cloneable {
             if (currentPlayer == A) {
                 ascore += scoreAdjust;
                 weightedAscore += scoreAdjust * Util.falloff(depth);
-                weightedAscore -= Util.falloff(Util.mazeDistance(opos, move));
+                weightedAscore -= scoreAdjust * Util.falloff(Util.mazeDistance(opos, move)) / 2;
             } else {
                 bscore += scoreAdjust;
                 weightedBscore += scoreAdjust * Util.falloff(depth);
-                weightedBscore -= Util.falloff(Util.mazeDistance(ypos, move));
+                weightedBscore -= scoreAdjust * Util.falloff(Util.mazeDistance(ypos, move)) / 2;
             }
         }
 

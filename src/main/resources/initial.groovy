@@ -4,7 +4,7 @@ import za.co.entelect.challenge.agents.*
 def getMap() {
   return """###################
 #........#........#
-#*##.###.#.###.##*#
+#*##.###.#.###.##.#
 #.##.###.#.###.##.#
 #.................#
 #.##.#.#####.#.##.#
@@ -32,5 +32,5 @@ def getA() {
 }
 
 def getB() {
-    return new Greedie()
+    return new Hayw1r3d()
 }

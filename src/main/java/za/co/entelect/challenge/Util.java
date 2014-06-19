@@ -38,6 +38,8 @@ public class Util {
         //return (float)Math.max(0, 1 - dist * 0.2);
         return 1 / (float)Math.sqrt(dist + 1);
         //return Math.min(1, 1 - dist / (Constants.MAX_MAZE_DIST));
+       // return (float) Math.pow(0.9, dist + 1);
+        //return 1f;
     }
 
     public static boolean isWall(XY pos) {
