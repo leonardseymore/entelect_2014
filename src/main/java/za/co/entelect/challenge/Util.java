@@ -34,6 +34,12 @@ public class Util {
         return Math.abs(startX - endX) + Math.abs(startY - endY);
     }
 
+    public static float falloff(int dist) {
+        //return (float)Math.max(0, 1 - dist * 0.2);
+        return 1 / (float)Math.sqrt(dist + 1);
+        //return Math.min(1, 1 - dist / (Constants.MAX_MAZE_DIST));
+    }
+
     public static boolean isWall(XY pos) {
         return isWall(pos.x, pos.y);
     }
