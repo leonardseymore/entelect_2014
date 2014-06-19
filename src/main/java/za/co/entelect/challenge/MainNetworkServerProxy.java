@@ -88,7 +88,10 @@ public class MainNetworkServerProxy {
                                 gameState.updateCell(pos, Constants.SPACE, false);
                                 gameState.updateCell(move, Constants.PLAYER_A, false);
 
-                                client.write(ByteBuffer.wrap(GameFactory.gameStateToString(gameState).getBytes()));
+                                ByteBuffer out = ByteBuffer.wrap(GameFactory.gameStateToString(gameState).getBytes());
+                                while (out.hasRemaining()) {
+                                    client.write(out);
+                                }
                             }
                         } else {
                             key.cancel();

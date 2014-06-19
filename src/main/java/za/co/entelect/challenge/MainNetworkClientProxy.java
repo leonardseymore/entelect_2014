@@ -64,6 +64,7 @@ public class MainNetworkClientProxy {
                             bytesRead = socket.read(responseBuffer);
                         }
                         System.out.println("READ:\n" + buffer.toString());
+                        socket.close();
                         return buffer.toString();
                     case SelectionKey.OP_WRITE:
                         while (mazeBuffer.hasRemaining()) {
@@ -78,6 +79,8 @@ public class MainNetworkClientProxy {
                 }
             }
         }
+
+
 
         return null;
     }
