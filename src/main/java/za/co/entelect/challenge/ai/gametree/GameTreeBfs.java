@@ -19,7 +19,6 @@ public class GameTreeBfs {
         GameTreeResultBfs result = bfs(gameState, player, maxDepth, 0, startTime, timeout);
         long thinkTime = System.currentTimeMillis() - startTime;
         assert thinkTime <= Constants.THINK_TIME + Constants.THINK_TIME_GRACE : "Out of time [" + thinkTime + " > " + Constants.THINK_TIME + "ms], BFS did not timeout";
-        System.out.println(thinkTime);
         return result.move;
     }
 
