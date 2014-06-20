@@ -27,9 +27,9 @@ public class GameTreeSearch {
     }
 
     private static GameTreeBfs gameTreeBfs = new GameTreeBfs();
-    public static XY bfs(GameState gameState, char player, int maxDepth) {
+    public static XY bfs(GameState gameState, char player, int maxDepth, long timeout) {
         UCTGameState uctGameState = UCT.convert(gameState);
-        return gameTreeBfs.bfs(uctGameState, player, maxDepth);
+        return gameTreeBfs.bfs(uctGameState, player, maxDepth, timeout);
     }
 
 }

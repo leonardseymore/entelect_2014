@@ -1,6 +1,7 @@
 package za.co.entelect.challenge.ai.decision.behavior;
 
 
+import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.agents.PacmanAgent;
 import za.co.entelect.challenge.ai.blackboard.Blackboard;
 import za.co.entelect.challenge.ai.gametree.GameTreeSearch;
@@ -18,7 +19,7 @@ public class GuessBestMoveBfs extends Task {
     public boolean run(PacmanAgent pacmanAgent, GameState gameState) {
         Blackboard blackboard = pacmanAgent.getBlackboard();
 
-        XY move = GameTreeSearch.bfs(gameState, gameState.getCurrentPlayer(), maxDepth);
+        XY move = GameTreeSearch.bfs(gameState, gameState.getCurrentPlayer(), maxDepth, Constants.THINK_TIME);
         if (move == null) {
             return false;
         }

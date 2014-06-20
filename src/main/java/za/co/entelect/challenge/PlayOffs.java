@@ -77,7 +77,7 @@ public class PlayOffs {
 
         StringBuilder perf = new StringBuilder();
         for (Map.Entry<String, Timer> timer : Util.metrics.getTimers().entrySet()) {
-            perf.append(timer.getKey() + ": ~" + String.format("%,.2f", timer.getValue().getSnapshot().getMean() / 1000) + "ms\n");
+            perf.append(timer.getKey() + ": ~" + String.format("%,.2f", timer.getValue().getSnapshot().getMean() / 1000_000) + "ms\n");
         }
         logger.info("Performance results:\n{}\n", perf);
 

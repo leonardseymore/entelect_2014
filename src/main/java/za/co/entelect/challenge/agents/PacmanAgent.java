@@ -1,6 +1,7 @@
 package za.co.entelect.challenge.agents;
 
 import com.codahale.metrics.Timer;
+import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.NoMoveFoundException;
 import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.ai.blackboard.Blackboard;
@@ -55,9 +56,13 @@ public abstract class PacmanAgent {
     }
 
     private XY doGetMove(GameState gameState, XY pos) throws NoMoveFoundException {
+        long startTime = System.currentTimeMillis();
         final Timer.Context timerContext = moveTimer.time();
         try {
-            return getMove(gameState, pos);
+            XY move = getMove(gameState, pos);
+            long thinkTime = System.currentTimeMillis() - startTime;
+            assert thinkTime <= Constants.THINK_TIME + Constants.THINK_TIME_GRACE : "Out of time [" + thinkTime + " > " + Constants.THINK_TIME + "ms], " + getName() + " did not timeout";
+            return move;
         } finally {
             timerContext.close();
         }
