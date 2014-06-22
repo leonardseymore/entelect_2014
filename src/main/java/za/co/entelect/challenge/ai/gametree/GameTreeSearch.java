@@ -32,5 +32,11 @@ public class GameTreeSearch {
         return gameTreeBfs.bfs(uctGameState, player, maxDepth, timeout);
     }
 
+    private static GameTreeMst gameTreeMst = new GameTreeMst();
+    public static XY mstd(GameState gameState, int maxDepth, long timeout) {
+        UCTGameState uctGameState = UCT.convert(gameState);
+        return gameTreeMst.mstd(uctGameState, maxDepth, timeout);
+    }
+
 }
 

@@ -20,9 +20,11 @@ public class PlayOffs {
     private static final List<PacmanAgent> AGENTS = new ArrayList<>();
     static {
         AGENTS.add(new Greedie());
+        AGENTS.add(new GreedieTactics());
         AGENTS.add(new Greedy());
         AGENTS.add(new Layzie());
         AGENTS.add(new Layzy());
+        AGENTS.add(new LayzyTactics());
         //AGENTS.add(new Dummie());
         //AGENTS.add(new Eddie());
         AGENTS.add(new Kungus());

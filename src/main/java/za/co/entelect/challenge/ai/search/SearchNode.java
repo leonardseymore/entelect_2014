@@ -8,7 +8,7 @@ import java.util.Stack;
 
 public class SearchNode implements Comparable<SearchNode> {
     public XY pos;
-    public int goalCost;
+    public float goalCost;
     public float runningCost;
 
     public SearchNode parent;

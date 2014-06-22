@@ -2,7 +2,9 @@ package za.co.entelect.challenge.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.Util;
+import za.co.entelect.challenge.ai.mcts.UCTGameState;
 
 import java.util.*;
 
@@ -33,6 +35,22 @@ public class MST {
         nodes.add(startingPos);
         nodes.addAll(gameState.getPills());
         nodes.addAll(gameState.getBonusPills());
+        return fromPoints(new ArrayList<>(nodes));
+    }
+
+    public static MST fromGameState(UCTGameState gameState, XY startingPos) {
+        Set<XY> nodes = new HashSet<>();
+        nodes.add(startingPos);
+
+        byte[] board = gameState.getBoard();
+        for (int i = 0; i < Constants.WIDTH; i++) {
+            for (int j = 0; j < Constants.HEIGHT; j++) {
+                byte c = board[i * Constants.HEIGHT + j];
+                if (c == UCTGameState.P || c == UCTGameState.BP) {
+                    nodes.add(new XY(i, j));
+                }
+            }
+        }
         return fromPoints(new ArrayList<>(nodes));
     }
 

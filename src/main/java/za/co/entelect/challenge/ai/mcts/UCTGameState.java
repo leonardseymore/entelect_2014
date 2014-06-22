@@ -1,5 +1,6 @@
 package za.co.entelect.challenge.ai.mcts;
 
+import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.domain.XY;
 
@@ -37,6 +38,7 @@ public class UCTGameState implements Cloneable {
         SPAWN_ZONE.add(new XY(9, 11));
     }
 
+    private long hash;
     byte currentPlayer;
     byte[] board;
     short ascore;
@@ -62,6 +64,7 @@ public class UCTGameState implements Cloneable {
         this.currentPlayer = currentPlayer;
         this.scoreLeft = scoreLeft;
         loadMoves();
+        this.hash = Util.hashFirstPrincipal(this);
     }
 
     public UCTGameState clone() {
@@ -77,6 +80,7 @@ public class UCTGameState implements Cloneable {
         byte[] boardClone = new byte[SIZE];
         System.arraycopy(board, 0, boardClone, 0, SIZE);
         clone.board = boardClone;
+        clone.hash = hash;
         return clone;
     }
 
@@ -248,6 +252,8 @@ public class UCTGameState implements Cloneable {
     }
 
     public void setCell(XY pos, byte value) {
+        hash = Constants.ZOBRIST[pos.x][pos.y][Constants.ZOBRIST_MAP.get((char)board[pos.x * HEIGHT + pos.y])] ^ hash;
+        hash ^= Constants.ZOBRIST[pos.x][pos.y][Constants.ZOBRIST_MAP.get((char)value)];
         board[pos.x * HEIGHT + pos.y] = value;
     }
 
@@ -304,5 +310,13 @@ public class UCTGameState implements Cloneable {
             buffer.append("\n");
         }
         return buffer.toString();
+    }
+
+    public long getHash() {
+        return hash;
+    }
+
+    public byte getCurrentPlayer() {
+        return currentPlayer;
     }
 }

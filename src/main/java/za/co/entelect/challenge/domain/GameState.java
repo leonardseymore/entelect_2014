@@ -206,6 +206,10 @@ public class GameState implements Cloneable {
     }
 
     public int makeMove(XY currentPoint, XY movePoint, int flags) {
+        return makeMove(currentPoint, movePoint, flags, true);
+    }
+
+    public int makeMove(XY currentPoint, XY movePoint, int flags, boolean swapPositions) {
         assert Util.isValidMove(this, movePoint, currentPoint) : "Player " + getCurrentPlayer() + " made an invalid move from " + currentPoint + " to " + movePoint;
 
         int scoreAdjust = 0;
@@ -279,10 +283,12 @@ public class GameState implements Cloneable {
             }
         }
 
-        if (currentPlayer == Constants.PLAYER_A) {
-            currentPlayer = Constants.PLAYER_B;
-        } else {
-            currentPlayer = Constants.PLAYER_A;
+        if (swapPositions) {
+            if (currentPlayer == Constants.PLAYER_A) {
+                currentPlayer = Constants.PLAYER_B;
+            } else {
+                currentPlayer = Constants.PLAYER_A;
+            }
         }
 
         if ((flags & UPDATE_INFLUENCE_MAP) == UPDATE_INFLUENCE_MAP) {

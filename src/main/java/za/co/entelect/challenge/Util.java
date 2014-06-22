@@ -3,6 +3,7 @@ package za.co.entelect.challenge;
 import com.codahale.metrics.MetricRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.entelect.challenge.ai.mcts.UCTGameState;
 import za.co.entelect.challenge.ai.search.Search;
 import za.co.entelect.challenge.ai.search.SearchNode;
 import za.co.entelect.challenge.domain.*;
@@ -200,10 +201,6 @@ public class Util {
     }
 
     public static boolean isValidMove(GameState gameState, XY movePoint, XY currentPosition) {
-        if (Constants.CAN_STAND_STILL && movePoint.equals(currentPosition)) {
-            return true;
-        }
-
         for (SearchNode node : Search.getAvailableNeighbors(gameState, new SearchNode(currentPosition))) {
             if (node.pos.equals(movePoint)) {
                 return true;
@@ -262,6 +259,19 @@ public class Util {
             for (int j = 0; j < Constants.HEIGHT; j++) {
                 char c = cells[i][j];
                 hashFp ^= Constants.ZOBRIST[i][j][Constants.ZOBRIST_MAP.get(c)];
+            }
+        }
+        return hashFp;
+    }
+
+    public static long hashFirstPrincipal(UCTGameState gameState) {
+        long hashFp = 0;
+
+        byte[] board = gameState.getBoard();
+        for (int i = 0; i < Constants.WIDTH; i++) {
+            for (int j = 0; j < Constants.HEIGHT; j++) {
+                byte c = board[i * Constants.HEIGHT + j];
+                hashFp ^= Constants.ZOBRIST[i][j][Constants.ZOBRIST_MAP.get((char)c)];
             }
         }
         return hashFp;

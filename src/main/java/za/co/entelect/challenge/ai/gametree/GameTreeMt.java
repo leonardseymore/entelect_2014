@@ -80,9 +80,6 @@ public class GameTreeMt extends GameTree {
 
         XY pos = gameState.getCurrentPosition();
         Collection<SearchNode> neighbors = Search.getAvailableNeighbors(gameState, new SearchNode(pos));
-        if (Constants.CAN_STAND_STILL) {
-            neighbors.add(new SearchNode(pos));
-        }
         for (SearchNode neighbor : neighbors) {
             XY move = neighbor.pos;
             GameState gameStateAfterMove = gameState.clone();

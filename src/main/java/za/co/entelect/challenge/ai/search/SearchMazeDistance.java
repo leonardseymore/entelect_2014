@@ -26,7 +26,7 @@ public class SearchMazeDistance {
             closed.add(currentNode);
             for (SearchNode toNode : getAvailableNeighbors(currentNode)) {
                 toNode.goalCost = distHeuristic(toNode, target);
-                int goalCost = currentNode.goalCost;
+                float goalCost = currentNode.goalCost;
                 float estGoalCost = goalCost + toNode.goalCost;
                 assert estGoalCost >= 0;
                 if (closed.contains(toNode)) {

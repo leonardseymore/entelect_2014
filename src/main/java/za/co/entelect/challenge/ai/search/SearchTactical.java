@@ -30,7 +30,7 @@ public class SearchTactical {
             closed.add(currentNode);
             for (SearchNode toNode : getAvailableNeighbors(gameState, currentNode)) {
                 toNode.goalCost = heuristic(gameState, toNode, target);
-                int goalCost = currentNode.goalCost;
+                float goalCost = currentNode.goalCost;
                 float estGoalCost = goalCost + toNode.goalCost;
                 assert estGoalCost >= 0 : "Goal cost " + estGoalCost + " must be >= 0";
                 if (closed.contains(toNode)) {
@@ -58,7 +58,7 @@ public class SearchTactical {
         return null;
     }
 
-    public int heuristic(GameState gameState, SearchNode node, XY target)  {
+    public float heuristic(GameState gameState, SearchNode node, XY target)  {
         int dist = Util.mazeDistance(node.pos, target);
         if (Util.isWarp(node.pos)) {
             XY warp = Util.getWarp(node.pos);
@@ -67,7 +67,7 @@ public class SearchTactical {
             }
         }
 
-        int val = dist;
+        float val = dist;
         char moveVal = gameState.getCell(node.pos);
         if (moveVal == Constants.PILL) {
             val += AIProps.PILL_COST;
@@ -87,16 +87,11 @@ public class SearchTactical {
         }
         */
 
-        /*
-        int val = dist;
         InfluenceMap influenceMap = gameState.getInfluenceMap();
-        int potential = (int) influenceMap.getPotentialOMap()[node.pos.x][node.pos.y]  * AIProps.INFLUENCE_COST;
-        if (val + potential >= 0) {
+        float potential = influenceMap.getPotentialOMap()[node.pos.x][node.pos.y] * AIProps.INFLUENCE_COST;
+        if (potential > 0) {
             val += potential;
-        } else {
-            val += -potential * 10;
         }
-        */
 
         return val;
     }

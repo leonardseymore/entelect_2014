@@ -72,10 +72,6 @@ public class Constants {
         }
     }
 
-
-
-    public static boolean CAN_STAND_STILL = false;
-
     public static final Color PLAYER_A_COLOR = new Color(168, 255, 125);
     public static final Color PLAYER_B_COLOR = new Color(255, 188, 76);
     public static final Color SEARCH_PATH_COLOR = new Color(150, 121, 255, 180);

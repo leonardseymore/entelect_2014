@@ -2,6 +2,8 @@ package za.co.entelect.challenge.ai.search;
 
 import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.Util;
+import za.co.entelect.challenge.ai.mcts.UCT;
+import za.co.entelect.challenge.ai.mcts.UCTGameState;
 import za.co.entelect.challenge.domain.GameState;
 import za.co.entelect.challenge.domain.XY;
 
@@ -29,6 +31,12 @@ public abstract class Search {
     private static final SearchTactical searchTactical = new SearchTactical();
     public static Stack<SearchNode> tactical(GameState gameState, XY pos, XY target) {
         return searchTactical.search(gameState, pos, target);
+    }
+
+    private static final SearchMst searchMst = new SearchMst();
+    public static Stack<SearchNode> mst(GameState gameState, XY pos) {
+        UCTGameState uctGameState = UCT.convert(gameState);
+        return searchMst.search(uctGameState, pos);
     }
 
     public static TestNeighbor DEFAULT_TEST_NEIGHBOR = new TestNeighbor();

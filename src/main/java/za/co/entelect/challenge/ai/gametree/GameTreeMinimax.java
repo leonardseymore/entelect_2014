@@ -31,9 +31,6 @@ public class GameTreeMinimax extends GameTree {
 
         XY pos = gameState.getCurrentPosition();
         Collection<SearchNode> neighbors = Search.getAvailableNeighbors(gameState, new SearchNode(pos));
-        if (Constants.CAN_STAND_STILL) {
-            neighbors.add(new SearchNode(pos));
-        }
         if (maxPlayer == player) {
             XY move = null;
             for (SearchNode neighbor : neighbors) {

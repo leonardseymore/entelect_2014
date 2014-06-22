@@ -12,10 +12,10 @@ import static za.co.entelect.challenge.Util.R;
 
 public class AIProps {
 
-    public static int EMPTY_COST = 1000;
-    public static int PILL_COST = 100;
+    public static int EMPTY_COST = 50;
+    public static int PILL_COST = 10;
     public static int BONUS_PILL_COST = 0;
-    public static int INFLUENCE_COST = 100;
+    public static int INFLUENCE_COST = 5;
     public static int DEPTH_HIGHEST_POTENTIAL_PILL = 20;
 
 }

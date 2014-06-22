@@ -1,15 +1,11 @@
 package za.co.entelect.challenge.agents;
 
-import za.co.entelect.challenge.AIProps;
+import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.ai.decision.behavior.*;
 
-public class Hayw1r3d extends BehaviorTreeAgent {
+public class Mango extends BehaviorTreeAgent {
 
-    public Hayw1r3d() {
-        this(AIProps.DEPTH_HIGHEST_POTENTIAL_PILL);
-    }
-
-    public Hayw1r3d(int numMatches) {
+    public Mango() {
         super(
                 new Sequence()
                         .a(new Selector()
@@ -19,7 +15,7 @@ public class Hayw1r3d extends BehaviorTreeAgent {
                                                 .a(new MoveToTarget())
                                         )
                                         .a(new Selector()
-                                                .a(new MoveToHighestPotentialPill(true, numMatches))
+                                                .a(new GuessBestMoveMst(8))
                                                 .a(new MoveToClosestPill(true))
                                         )
                         )
