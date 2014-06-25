@@ -35,6 +35,8 @@ public class InfluenceMap {
     private int[][] frontLine;
     private int[] maxTension;
     private int[] maxVulnerability;
+    private float totalYInfluence;
+    private float totalOInfluence;
     private float totalYPotential;
     private float totalOPotential;
 
@@ -92,6 +94,14 @@ public class InfluenceMap {
 
     public float[][] getPillCluster() {
         return pillCluster;
+    }
+
+    public float getTotalYInfluence() {
+        return totalYInfluence;
+    }
+
+    public float getTotalOInfluence() {
+        return totalOInfluence;
     }
 
     public float getTotalYPotential() {
@@ -163,6 +173,8 @@ public class InfluenceMap {
         // calculate and normalize influence maps
         float influenceYMax = 0;
         float influenceOMax = 0;
+        totalYInfluence = 0;
+        totalOInfluence = 0;
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 influenceYMap[i][j] = yInfluenceMap[i][j] - oInfluenceMap[i][j];
@@ -179,6 +191,11 @@ public class InfluenceMap {
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 influenceYMap[i][j] /= influenceYMax;
+                if (influenceYMap[i][j] > 0) {
+                    totalYInfluence += influenceYMap[i][j];
+                } else if (influenceYMap[i][j] < 0) {
+                    totalOInfluence += Math.abs(influenceYMap[i][j]);
+                }
                 influenceOMap[i][j] /= influenceOMax;
             }
         }
@@ -208,9 +225,6 @@ public class InfluenceMap {
                     potentialOMax = potentialOMap[i][j];
                 }
 
-                totalYPotential += yPotentialMap[i][j];
-                totalOPotential += oPotentialMap[i][j];
-
                 float tension = yInfluenceMap[i][j] + oInfluenceMap[i][j];
                 tensionMap[i][j] = tension;
                 if (tension > maxT) {
@@ -231,6 +245,11 @@ public class InfluenceMap {
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 potentialYMap[i][j] /= potentialYMax;
+                if (potentialYMap[i][j] > 0) {
+                    totalYPotential += potentialYMap[i][j];
+                } else if (potentialYMap[i][j] < 0) {
+                    totalOPotential += Math.abs(potentialYMap[i][j]);
+                }
                 potentialOMap[i][j] /= potentialOMax;
             }
         }

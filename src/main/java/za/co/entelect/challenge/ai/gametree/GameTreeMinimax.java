@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.Util;
+import za.co.entelect.challenge.ai.search.InfluenceMap;
 import za.co.entelect.challenge.ai.search.Search;
 import za.co.entelect.challenge.ai.search.SearchNode;
 import za.co.entelect.challenge.domain.GameState;
@@ -20,7 +21,7 @@ public class GameTreeMinimax extends GameTree {
 
         GameTreeResult result = minimax(gameState, player, player, maxDepth, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
-        logger.debug("MINIMAX: Player {} MT searched {} levels in {}ms with a best score of {} and a move of {}", player, maxDepth, System.currentTimeMillis() - startTime, result.score, result.move);
+        logger.debug("MINIMAX: Player {} MiniMax searched {} levels in {}ms with a best score of {} and a move of {}", player, maxDepth, System.currentTimeMillis() - startTime, result.score, result.move);
         return result.move;
     }
 

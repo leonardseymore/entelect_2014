@@ -240,9 +240,11 @@ public class GUI extends JFrame implements Runnable {
                     g.drawString("p=pause, r=restart, d=dump, x=debug, i=influence, w=names", x, y += 12);
                     if (renderInfluenceMap) {
                         g.drawString("0=c,1=yi,2=oi,3=iy,4=io,5=t,6=v,7=yp,8=op", x, y += 12);
+                        float yi = gameState.getInfluenceMap().getTotalYInfluence();
+                        float oi = gameState.getInfluenceMap().getTotalOInfluence();
                         float yp = gameState.getInfluenceMap().getTotalYPotential();
                         float op = gameState.getInfluenceMap().getTotalOPotential();
-                        g.drawString("Y pot.: " + yp + ", O pot.: " + op, x, y += 12);
+                        g.drawString("Y inf.: " + yi + ", O inf.: " + oi + ", Y pot.: " + yp + ", O pot.: " + op, x, y += 12);
                     }
                     g.drawString("Turn #" + gameState.getNumMoves() + ", #!" + gameState.getMovesNoPills() + ": " + (gameState.isGameOver() ? "GAME OVER" : gameState.getCurrentPlayer()), x, y += 12);
 
