@@ -15,7 +15,7 @@ public class Eek extends BehaviorTreeAgent {
                                         .a(new MoveToTarget())
                                 )
                                 .a(new Sequence()
-                                        .a(new GuessBestMoveBfs(12))
+                                        .a(new GuessBestMoveBfs(14))
                                         .a(new MoveToTarget())
                                 )
                                 .a(new Selector()
