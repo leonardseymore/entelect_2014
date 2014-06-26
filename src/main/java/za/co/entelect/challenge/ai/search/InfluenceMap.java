@@ -3,6 +3,7 @@ package za.co.entelect.challenge.ai.search;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.entelect.challenge.Constants;
+import za.co.entelect.challenge.ai.filters.PathCluster;
 import za.co.entelect.challenge.ai.filters.PillCluster;
 import za.co.entelect.challenge.domain.GameState;
 import za.co.entelect.challenge.domain.XY;
@@ -32,6 +33,7 @@ public class InfluenceMap {
     private float[][] potentialYMap;
     private float[][] potentialOMap;
     private float[][] pillCluster;
+    private float[][] pathCluster;
     private int[][] frontLine;
     private int[] maxTension;
     private int[] maxVulnerability;
@@ -54,6 +56,7 @@ public class InfluenceMap {
         potentialMap = new float[w][h];
         tensionMap = new float[w][h];
         pillCluster = new float[w][h];
+        pathCluster = new float[w][h];
         vulnerabilityMap = new float[w][h];
         frontLine = new int[w][h];
         maxTension = new int[2];
@@ -94,6 +97,10 @@ public class InfluenceMap {
 
     public float[][] getPillCluster() {
         return pillCluster;
+    }
+
+    public float[][] getPathCluster() {
+        return pathCluster;
     }
 
     public float getTotalYInfluence() {
@@ -146,6 +153,7 @@ public class InfluenceMap {
                 oInfluenceMap[i][j] = 0;
                 potentialMap[i][j] = 0;
                 pillCluster[i][j] = 0;
+                pathCluster[i][j] = 0;
             }
         }
 
@@ -163,10 +171,13 @@ public class InfluenceMap {
             }
         }
 
+        //pathCluster = PathCluster.getCellPotential(gameState);
+
         pillCluster = PillCluster.getCellPotential(gameState);
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 potentialMap[i][j] += pillCluster[i][j];
+                //potentialMap[i][j] += pathCluster[i][j] * 0.1;
             }
         }
 

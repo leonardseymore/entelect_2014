@@ -57,8 +57,8 @@ public class PillCluster {
                 } else if (spaces.containsKey(pos)) {
                     cellPotential = maxSpaceValue - spaces.get(pos);
                 }
+                cellPotential += bonusPillInfluence[x][y];
                 cellPotential /= (float) (maxPillValue + maxSpaceValue);
-                //cellPotential += bonusPillInfluence[x][y];
                 //cellPotential = Math.min(1, cellPotential);
 
                 //assert cellPotential >= 0 && cellPotential <= 1.0 : "Potential " + cellPotential + " must be clamped between 0 and 1";
@@ -80,8 +80,9 @@ public class PillCluster {
     }
 
     private static float falloff(float dist) {
-        return 1 / (float) Math.pow(dist == 0 ? 1f : dist, 0.5);
+        //return 1 / (float) Math.pow(dist == 0 ? 1f : dist, 0.5);
         //return Math.min(1, 1 - dist / (Constants.MAX_MAZE_DIST));
+        return Math.max(0, 1 - dist / (float) 6);
     }
 
     // Run cellular automata to find pills that have neighbors on all sides
@@ -107,6 +108,7 @@ public class PillCluster {
         }
 
         Map<XY, Integer> clusters = new HashMap<>();
+        XY maxPill = null;
         for (XY pos : allCells) {
             clusters.put(pos, Collections.frequency(seen, pos));
         }

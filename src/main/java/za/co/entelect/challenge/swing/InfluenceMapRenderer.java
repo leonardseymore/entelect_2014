@@ -2,6 +2,7 @@ package za.co.entelect.challenge.swing;
 
 import org.apache.log4j.Logger;
 import za.co.entelect.challenge.Constants;
+import za.co.entelect.challenge.ai.filters.PathCluster;
 import za.co.entelect.challenge.ai.search.InfluenceMap;
 import za.co.entelect.challenge.domain.GameState;
 
@@ -15,7 +16,7 @@ public class InfluenceMapRenderer {
     private static final float MULTIPLIER = 1f;
 
     private enum InfluenceMapType {
-        COMBINED, YINFLUENCE, YREACHABLE, OREACHABLE, OINFLUENCE, INFLUENCEY, INFLUENCEO, TENSION, VULNERABILITY, POTENTIALY, POTENTIALO, PILL_CLUSTER
+        COMBINED, YINFLUENCE, YREACHABLE, OREACHABLE, OINFLUENCE, INFLUENCEY, INFLUENCEO, TENSION, VULNERABILITY, POTENTIALY, POTENTIALO, PILL_CLUSTER, PATH_CLUSTER
     }
 
     private InfluenceMapType mapType = InfluenceMapType.COMBINED;
@@ -44,7 +45,7 @@ public class InfluenceMapRenderer {
             mapType = InfluenceMapType.TENSION;
         }
         if (keyboard.keyDownOnce(KeyEvent.VK_6)) {
-            mapType = InfluenceMapType.VULNERABILITY;
+            mapType = InfluenceMapType.PATH_CLUSTER;
         }
         if (keyboard.keyDownOnce(KeyEvent.VK_7)) {
             mapType = InfluenceMapType.POTENTIALY;
@@ -146,6 +147,15 @@ public class InfluenceMapRenderer {
                             color = Color.getHSBColor(0.5f, 0.5f, Math.min(1f, val));
                         } else {
                             color = Color.getHSBColor(1f, 0.5f, Math.min(1f, Math.abs(val)));
+                        }
+                        break;
+                    case PATH_CLUSTER:
+                        float[][] pathCluster = imap.getPathCluster();
+                        val = pathCluster[x][y] * MULTIPLIER;
+                        if (val > 0) {
+                            color = Color.getHSBColor(0.4f, 1, Math.min(1f, val));
+                        } else if (val < 0) {
+                            color = Color.getHSBColor(0.1f, 1, Math.min(1f, Math.abs(val)));
                         }
                         break;
                     default:
