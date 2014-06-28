@@ -28,7 +28,7 @@ public class PacmanApp {
 
         StringBuilder displayString = new StringBuilder();
         for (Visit visit : visits) {
-            displayString.append(visit.getPreviousCell().getCell() + " -> " + visit.getCell());
+            displayString.append(visit.getPreviousStandstill().getCell() + " -> " + visit.getCell());
             displayString.append("\n");
         }
 

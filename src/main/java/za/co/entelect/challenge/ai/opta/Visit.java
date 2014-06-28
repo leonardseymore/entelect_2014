@@ -7,11 +7,11 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.domain.XY;
 
-@PlanningEntity
+@PlanningEntity(difficultyComparatorClass = VisitDifficultyComparator.class)
 public class Visit implements Standstill {
 
     private XY cell;
-    private Standstill previousCell;
+    private Standstill previousStandstill;
 
     public Visit() {
     }
@@ -29,23 +29,23 @@ public class Visit implements Standstill {
     }
 
     @PlanningVariable(chained = true, valueRangeProviderRefs = {"domicileRange", "visitRange"})
-    public Standstill getPreviousCell() {
-        return previousCell;
+    public Standstill getPreviousStandstill() {
+        return previousStandstill;
     }
 
-    public void setPreviousCell(Standstill previousCell) {
-        this.previousCell = previousCell;
+    public void setPreviousStandstill(Standstill previousStandstill) {
+        this.previousStandstill = previousStandstill;
     }
 
-    public int getDistanceToPreviousCell() {
-        if (previousCell == null) {
+    public int getDistanceToPreviousStandstill() {
+        if (previousStandstill == null) {
             return 0;
         }
-        return Util.mazeDistance(cell, previousCell.getCell());
+        return getDistanceTo(previousStandstill);
     }
 
-    public int getDistanceTo(XY otherCell) {
-        return Math.abs(cell.x - otherCell.x) + Math.abs(cell.y - otherCell.y);
+    public int getDistanceTo(Standstill otherCell) {
+        return Math.abs(cell.x - otherCell.getCell().x) + Math.abs(cell.y - otherCell.getCell().y);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Visit implements Standstill {
             Visit other = (Visit) o;
             return new EqualsBuilder()
                     .append(cell, other.cell)
-                    .append(previousCell, other.previousCell) // TODO performance leak: not needed?
+                    .append(previousStandstill, other.previousStandstill) // TODO performance leak: not needed?
                     .isEquals();
         } else {
             return false;
@@ -75,7 +75,7 @@ public class Visit implements Standstill {
     public int solutionHashCode() {
         return new HashCodeBuilder()
                 .append(cell) // TODO performance leak: not needed?
-                .append(previousCell) // TODO performance leak: not needed?
+                .append(previousStandstill) // TODO performance leak: not needed?
                 .toHashCode();
     }
 
@@ -103,7 +103,7 @@ public class Visit implements Standstill {
     public String toString() {
         return "Visit{" +
                 "cell=" + cell +
-                ", previousCell=" + previousCell +
+                ", previousCell=" + previousStandstill +
                 '}';
     }
 }

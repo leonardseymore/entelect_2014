@@ -23,7 +23,7 @@ public class Opta {
         XY currentPos = pos;
         while (!open.isEmpty()) {
             for (Visit visit : visits) {
-                if (visit.getPreviousCell().getCell().equals(currentPos)) {
+                if (visit.getPreviousStandstill().getCell().equals(currentPos)) {
                     moves.add(visit.getCell());
                     currentPos = visit.getCell();
                     open.remove(currentPos);

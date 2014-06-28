@@ -4,53 +4,37 @@ import org.optaplanner.core.api.score.buildin.simple.SimpleScore;
 import org.optaplanner.core.impl.score.director.simple.SimpleScoreCalculator;
 import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.ai.search.InfluenceMap;
-import za.co.entelect.challenge.domain.Game;
 import za.co.entelect.challenge.domain.GameState;
-import za.co.entelect.challenge.domain.XY;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PacmanScoreCalculator implements SimpleScoreCalculator<PacmanSolution> {
 
     @Override
     public SimpleScore calculateScore(PacmanSolution tour) {
-        GameState gameState = tour.getGameState();
-        InfluenceMap influenceMap = gameState.getInfluenceMap();
-
         List<Visit> visitList = tour.getVisitList();
+        Set<Visit> tailVisitSet = new HashSet<>(visitList);
         int score = 0;
         for (Visit visit : visitList) {
-            Standstill previousStandstill = visit.getPreviousCell();
+            Standstill previousStandstill = visit.getPreviousStandstill();
             if (previousStandstill != null) {
-                score -= visit.getDistanceToPreviousCell();
+                score -= visit.getDistanceToPreviousStandstill();
+                if (previousStandstill instanceof Visit) {
+                    tailVisitSet.remove(previousStandstill);
+                }
             }
-
-            /*
-            // minimize difference between cell potentials
-            if (previousStandstill != null) {
-                float[][] pot = influenceMap.getyInfluenceMap();
-                XY cell = visit.getCell();
-                XY previousCell = previousStandstill.getCell();
-
-                int cellPot = (int)(pot[cell.x][cell.y] * 100);
-                int previousCellPot = (int)(pot[previousCell.x][previousCell.y] * 100);
-
-                score -= Math.abs(cellPot - previousCellPot);
+        }
+        if (tour.getDomicileList().size() != 1) {
+            throw new UnsupportedOperationException(
+                    "The domicileList (" + tour.getDomicileList() + ") should be a singleton.");
+        }
+        Domicile domicile = tour.getDomicileList().get(0);
+        for (Visit tailVisit : tailVisitSet) {
+            if (tailVisit.getPreviousStandstill() != null) {
+                score -= Util.mazeDistance(domicile.getCell(), tailVisit.getCell());
             }
-
-            // avoid low potentials
-            if (previousStandstill != null) {
-                float[][] pot = influenceMap.getPillCluster();
-                XY cell = visit.getCell();
-                XY previousCell = previousStandstill.getCell();
-
-                int cellPot = (int)(pot[cell.x][cell.y] * 100);
-                int previousCellPot = (int)(pot[previousCell.x][previousCell.y] * 100);
-
-                score += cellPot;
-                score += previousCellPot;
-            }
-            */
         }
         return SimpleScore.valueOf(score);
     }

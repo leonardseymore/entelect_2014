@@ -6,9 +6,9 @@
 
     <scoreDirectorFactory>
         <scoreDefinitionType>SIMPLE</scoreDefinitionType>
-        <simpleScoreCalculatorClass>za.co.entelect.challenge.ai.opta.PacmanScoreCalculator</simpleScoreCalculatorClass>
+        <!--<simpleScoreCalculatorClass>za.co.entelect.challenge.ai.opta.PacmanScoreCalculator</simpleScoreCalculatorClass>-->
         <!--<incrementalScoreCalculatorClass>org.optaplanner.examples.tsp.solver.score.TspIncrementalScoreCalculator</incrementalScoreCalculatorClass>-->
-        <!--<scoreDrl>/opta/pacmanScoreRules.drl</scoreDrl>-->
+        <scoreDrl>/opta/pacmanScoreRules.drl</scoreDrl>
         <!--<assertionScoreDirectorFactory>-->
         <!--<incrementalScoreCalculatorClass>org.optaplanner.examples.tsp.solver.score.TspIncrementalScoreCalculator</incrementalScoreCalculatorClass>-->
         <!--</assertionScoreDirectorFactory>-->

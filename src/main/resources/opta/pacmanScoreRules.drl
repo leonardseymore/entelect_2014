@@ -9,7 +9,16 @@ global SimpleScoreHolder scoreHolder;
 
 rule "distanceToPreviousStandstill"
     when
-        $visit : Visit(previousCell != null, $distanceToPreviousCell : distanceToPreviousCell)
+        $visit : Visit(previousStandstill != null, $distanceToPreviousStandstill : distanceToPreviousStandstill)
     then
-        scoreHolder.addConstraintMatch(kcontext, - $distanceToPreviousCell);
+        scoreHolder.addConstraintMatch(kcontext, - $distanceToPreviousStandstill);
+end
+
+rule "distanceFromLastVisitToDomicile"
+    when
+        $visit : Visit(previousStandstill != null)
+        not Visit(previousStandstill == $visit)
+        $domicile : Domicile()
+    then
+        scoreHolder.addConstraintMatch(kcontext, - $visit.getDistanceTo($domicile));
 end
