@@ -24,7 +24,17 @@ public class Optima extends PacmanAgent {
     protected XY getMove(GameState gameState, XY pos) throws NoMoveFoundException {
         visitList = Opta.solve(gameState);
         moves = Opta.moves(visitList, gameState);
-        return Search.getAvailableNeighbors(gameState, new SearchNode(pos)).iterator().next().pos;
+        XY target = moves.get(0);
+        Stack<SearchNode> path = Search.tactical(gameState, pos, target);
+        if (path == null) {
+            return null;
+        }
+
+        SearchNode moo = path.peek();
+        while ((pos.equals(moo.pos)) && !path.isEmpty()) {
+            moo = path.pop();
+        }
+        return moo.pos;
     }
 
     @Override
