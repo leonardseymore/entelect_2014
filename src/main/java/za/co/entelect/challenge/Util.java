@@ -306,9 +306,9 @@ public class Util {
     }
 
     public static void writeTmpMaze(GameState gameState) {
-        new File("/tmp/pacman").mkdirs();
+        new File("/tmp/opta").mkdirs();
         String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        String filename = "/tmp/pacman/pacman_" + date + ".txt";
+        String filename = "/tmp/opta/pacman_" + date + ".txt";
         GameFactory.writeMaze(filename, gameState);
     }
 }

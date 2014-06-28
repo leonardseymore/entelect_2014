@@ -1,6 +1,7 @@
 package za.co.entelect.challenge.swing;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.ai.filters.PathCluster;
 import za.co.entelect.challenge.ai.search.InfluenceMap;
@@ -11,7 +12,7 @@ import java.awt.event.KeyEvent;
 
 public class InfluenceMapRenderer {
 
-    public static final Logger logger = Logger.getLogger(InfluenceMapRenderer.class);
+    public static final Logger logger = LoggerFactory.getLogger(InfluenceMapRenderer.class);
 
     private static final float MULTIPLIER = 1f;
 

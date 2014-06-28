@@ -28,7 +28,7 @@ def getMap() {
 }
 
 def getA() {
-  return new Hayw1r3d()
+  return new Optima()
 }
 
 def getB() {
