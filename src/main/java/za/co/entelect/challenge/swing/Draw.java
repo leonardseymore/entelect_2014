@@ -4,10 +4,12 @@ import za.co.entelect.challenge.Constants;
 import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.ai.search.SearchNode;
 import za.co.entelect.challenge.domain.GameState;
+import za.co.entelect.challenge.domain.GameStateGraph;
 import za.co.entelect.challenge.domain.MST;
 import za.co.entelect.challenge.domain.XY;
 
 import java.awt.*;
+import java.util.Collection;
 import java.util.Stack;
 
 public class Draw {
@@ -172,5 +174,32 @@ public class Draw {
 
         g.setColor(new Color(0, 255, 0, (int) (127 * Math.abs(pulse))));
         Draw.fillRect(g, Constants.PORTAL_X, Constants.PORTAL_Y, 2);
+    }
+
+    public static void drawGameGraph(Graphics2D g, GameStateGraph graph) {
+        java.util.List<GameStateGraph.Edge> edges = graph.getEdges();
+        int i = 1;
+        for (GameStateGraph.Edge edge : edges) {
+            if (false && i > 4) {
+                break;
+            }
+            if (i % 2 == 0) {
+                g.setColor(Color.getHSBColor(i / (float)edges.size(), 1, 1));
+            } else {
+                g.setColor(Color.getHSBColor(0.5f - i / (float)edges.size(), 1, 1));
+            }
+            for (XY xy : edge.getCells()) {
+                if (true || i == 3) {
+                    Draw.fillRect(g, xy.x, xy.y, 0);
+                }
+            }
+            i++;
+        }
+
+        Collection<GameStateGraph.Vertex> vertices = graph.getIntersects();
+        for (XY xy : vertices) {
+            g.setColor(Color.pink);
+            Draw.drawCross(g, xy.x, xy.y);
+        }
     }
 }
