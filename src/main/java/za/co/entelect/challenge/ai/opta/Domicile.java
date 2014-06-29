@@ -18,5 +18,10 @@ public class Domicile implements Standstill {
         this.cell = cell;
     }
 
-
+    @Override
+    public String toString() {
+        return "Domicile{" +
+                "cell=" + cell +
+                '}';
+    }
 }

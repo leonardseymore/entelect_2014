@@ -15,7 +15,7 @@
     </scoreDirectorFactory>
 
     <termination>
-        <maximumSecondsSpend>1</maximumSecondsSpend>
+        <maximumSecondsSpend>3</maximumSecondsSpend>
     </termination>
 
     <constructionHeuristic>
@@ -37,7 +37,7 @@
             <!--</swapMoveSelector>-->
             <subChainChangeMoveSelector>
                 <subChainSelector>
-                    <maximumSubChainSize>20</maximumSubChainSize>
+                    <maximumSubChainSize>183</maximumSubChainSize>
                 </subChainSelector>
                 <selectReversingMoveToo>true</selectReversingMoveToo>
             </subChainChangeMoveSelector>
@@ -49,7 +49,7 @@
             <entityTabuSize>5</entityTabuSize>
         </acceptor>
         <forager>
-            <acceptedCountLimit>5000</acceptedCountLimit>
+            <acceptedCountLimit>500</acceptedCountLimit>
         </forager>
     </localSearch>
 </solver>

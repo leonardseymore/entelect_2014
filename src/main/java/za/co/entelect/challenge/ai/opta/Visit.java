@@ -44,8 +44,8 @@ public class Visit implements Standstill {
         return getDistanceTo(previousStandstill);
     }
 
-    public int getDistanceTo(Standstill otherCell) {
-        return Math.abs(cell.x - otherCell.getCell().x) + Math.abs(cell.y - otherCell.getCell().y);
+    public int getDistanceTo(Standstill standstill) {
+        return Util.mazeDistance(cell, standstill.getCell());
     }
 
     /**

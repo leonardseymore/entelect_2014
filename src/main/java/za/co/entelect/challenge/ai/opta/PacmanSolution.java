@@ -62,6 +62,7 @@ public class PacmanSolution implements Solution<SimpleScore> {
         List<Object> facts = new ArrayList<Object>();
         facts.addAll(pills);
         facts.addAll(domicileList);
+        facts.add(gameState);
         return facts;
     }
 

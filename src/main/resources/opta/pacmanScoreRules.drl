@@ -4,12 +4,14 @@ package za.co.entelect.challenge.ai.opta;
 import org.optaplanner.core.api.score.buildin.simple.SimpleScoreHolder;
 
 import za.co.entelect.challenge.ai.opta.*;
+import za.co.entelect.challenge.domain.GameState;
 
 global SimpleScoreHolder scoreHolder;
 
 rule "distanceToPreviousStandstill"
     when
         $visit : Visit(previousStandstill != null, $distanceToPreviousStandstill : distanceToPreviousStandstill)
+        $gameState : GameState()
     then
         scoreHolder.addConstraintMatch(kcontext, - $distanceToPreviousStandstill);
 end

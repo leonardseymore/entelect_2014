@@ -4,6 +4,9 @@ import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.config.solver.XmlSolverFactory;
 import za.co.entelect.challenge.Util;
+import za.co.entelect.challenge.ai.search.Search;
+import za.co.entelect.challenge.ai.search.SearchCriteriaFactory;
+import za.co.entelect.challenge.ai.search.SearchNode;
 import za.co.entelect.challenge.domain.GameState;
 import za.co.entelect.challenge.domain.XY;
 
@@ -18,7 +21,14 @@ public class Opta {
     public static List<XY> moves(List<Visit> visits, GameState gameState) {
         XY pos = gameState.getCurrentPosition();
 
-        Set<XY> open = Util.clone(gameState.getPills());
+        //Set<XY> open = Util.clone(gameState.getPills());
+
+        Set<XY> open = new HashSet<>();
+        Stack<SearchNode> matches = Search.bfs(gameState, gameState.getCurrentPosition(), SearchCriteriaFactory.nodeIsAnyPill, 20);
+        for (SearchNode match : matches) {
+            open.add(match.pos);
+        }
+
         List<XY> moves = new ArrayList<>();
         XY currentPos = pos;
         while (!open.isEmpty()) {
@@ -41,7 +51,14 @@ public class Opta {
 
         PacmanSolution unsolved = new PacmanSolution();
         unsolved.setGameState(gameState);
-        List<XY> pills = new ArrayList<>(Util.getAllPills(gameState));
+
+        List<XY> pills = new ArrayList<>();
+        Stack<SearchNode> matches = Search.bfs(gameState, gameState.getCurrentPosition(), SearchCriteriaFactory.nodeIsAnyPill, 20);
+        for (SearchNode match : matches) {
+            pills.add(match.pos);
+        }
+
+        //List<XY> pills = new ArrayList<>(Util.getAllPills(gameState));
         unsolved.setPills(pills);
 
         List<Visit> visits = new ArrayList<>();
