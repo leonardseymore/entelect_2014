@@ -28,9 +28,9 @@ def getMap() {
 }
 
 def getA() {
-  return new Optima()
+  return new Zebra()
 }
 
 def getB() {
-    return new Eek()
+    return new Greedie()
 }

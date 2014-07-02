@@ -299,7 +299,7 @@ public class GameState implements Cloneable {
     }
 
     public GameState clone() {
-        GameState clone = new GameState(cells, currentPlayer, gameOver, pills, bonusPills, poisonPills, playerAScore, playerBScore, playerAPos, playerBPos, scoreLeft, numMoves, movesNoPills, hash, influenceMap);
+        GameState clone = new GameState(cells, currentPlayer, gameOver, pills, bonusPills, poisonPills, playerAScore, playerBScore, playerAPos, playerBPos, scoreLeft, numMoves, movesNoPills, hash, influenceMap.clone());
         return clone;
     }
 

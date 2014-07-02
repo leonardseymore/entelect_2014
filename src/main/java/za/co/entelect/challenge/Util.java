@@ -3,9 +3,9 @@ package za.co.entelect.challenge;
 import com.codahale.metrics.MetricRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import za.co.entelect.challenge.ai.filters.PillCluster;
 import za.co.entelect.challenge.ai.mcts.UCTGameState;
-import za.co.entelect.challenge.ai.search.Search;
-import za.co.entelect.challenge.ai.search.SearchNode;
+import za.co.entelect.challenge.ai.search.*;
 import za.co.entelect.challenge.domain.*;
 import za.co.entelect.challenge.groovy.GameFactory;
 
@@ -238,7 +238,7 @@ public class Util {
         for (int x = 0; x < Constants.WIDTH; x++) {
             for (int y = 0; y < Constants.HEIGHT; y++) {
                 char c = cells[x][y];
-                if (c != Constants.PILL && c != Constants.BONUS_PILL && c != Constants.WALL) {
+                if (c == Constants.SPACE || c == Constants.PLAYER_A || c == Constants.PLAYER_B) {
                     spaces.add(new XY(x, y));
                 }
             }
@@ -310,5 +310,85 @@ public class Util {
         String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String filename = "/tmp/opta/pacman_" + date + ".txt";
         GameFactory.writeMaze(filename, gameState);
+    }
+
+    public static void writeInfluenceMapToExperiments(GameState gameState) {
+        String directory = "C:\\Users\\leonard\\Dropbox\\Software Developer\\java\\entelect\\pacman\\pacman\\experiments";
+        InfluenceMap influenceMap = gameState.getInfluenceMap();
+        Util.writeToFile(directory, "y_inf.txt", Util.toSv(influenceMap.getyInfluenceMap()));
+        Util.writeToFile(directory, "o_inf.txt", Util.toSv(influenceMap.getoInfluenceMap()));
+        Util.writeToFile(directory, "pill_cluster.txt", Util.toSv(influenceMap.getPillCluster()));
+        //Util.writeToFile(directory, "bp" + bpNum + "_inf.txt", Util.toSv(bpInf));
+        Util.writeToFile(directory, "bp_sum_inf.txt", Util.toSv(influenceMap.getBpInf()));
+        Util.writeToFile(directory, "p_sum_inf.txt", Util.toSv(influenceMap.getpInf()));
+    }
+
+    public static String toMathematica(float[][] field) {
+        StringBuilder buffer = new StringBuilder();
+
+        buffer.append("{");
+        for (int y = 0; y < Constants.HEIGHT; y++) {
+            buffer.append("{");
+            for (int x = 0; x < Constants.WIDTH; x++) {
+                buffer.append(field[x][y]);
+                if (x != Constants.WIDTH - 1) {
+                    buffer.append(", ");
+                }
+            }
+            buffer.append("}");
+            if (y != Constants.HEIGHT - 1) {
+                buffer.append(",\n");
+            }
+        }
+        buffer.append("}");
+        return buffer.toString();
+    }
+
+    public static String toSv(float[][] field) {
+        return toSv(field, " ");
+    }
+
+    public static String toSv(float[][] field, String delimeter) {
+        StringBuilder buffer = new StringBuilder();
+        for (int y = 0; y < Constants.HEIGHT; y++) {
+            for (int x = 0; x < Constants.WIDTH; x++) {
+                buffer.append(field[x][y]);
+                if (x != Constants.WIDTH - 1) {
+                    buffer.append(delimeter);
+                }
+            }
+            if (y != Constants.HEIGHT - 1) {
+                buffer.append("\n");
+            }
+        }
+        return buffer.toString();
+    }
+
+    public static float[][] normalize(float[][] input) {
+        float[][] result = new float[Constants.WIDTH][Constants.HEIGHT];
+        float max = 0;
+        for (int x = 0; x < Constants.WIDTH; x++) {
+            for (int y = 0; y < Constants.HEIGHT; y++) {
+                if (input[x][y] > max) {
+                    max = input[x][y];
+                }
+            }
+        }
+        for (int x = 0; x < Constants.WIDTH; x++) {
+            for (int y = 0; y < Constants.HEIGHT; y++) {
+                result[x][y] = input[x][y]/max;
+            }
+        }
+        return result;
+    }
+
+    public static void writeToFile(String directory, String filename, String output) {
+        try {
+            PrintWriter writer = new PrintWriter(new File(directory, filename));
+            writer.print(output);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

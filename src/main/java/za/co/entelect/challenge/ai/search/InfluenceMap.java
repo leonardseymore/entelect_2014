@@ -3,6 +3,7 @@ package za.co.entelect.challenge.ai.search;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import za.co.entelect.challenge.Constants;
+import za.co.entelect.challenge.Util;
 import za.co.entelect.challenge.ai.filters.PathCluster;
 import za.co.entelect.challenge.ai.filters.PillCluster;
 import za.co.entelect.challenge.domain.GameState;
@@ -13,7 +14,7 @@ import java.awt.*;
 import java.util.Collection;
 import java.util.Map;
 
-public class InfluenceMap {
+public class InfluenceMap implements Cloneable {
 
     private static final Logger logger = LoggerFactory.getLogger(InfluenceMap.class);
 
@@ -34,6 +35,8 @@ public class InfluenceMap {
     private float[][] potentialOMap;
     private float[][] pillCluster;
     private float[][] pathCluster;
+    private float[][] pInf;
+    private float[][] bpInf;
     private int[][] frontLine;
     private int[] maxTension;
     private int[] maxVulnerability;
@@ -57,6 +60,8 @@ public class InfluenceMap {
         tensionMap = new float[w][h];
         pillCluster = new float[w][h];
         pathCluster = new float[w][h];
+        pInf = new float[w][h];
+        bpInf = new float[w][h];
         vulnerabilityMap = new float[w][h];
         frontLine = new int[w][h];
         maxTension = new int[2];
@@ -101,6 +106,14 @@ public class InfluenceMap {
 
     public float[][] getPathCluster() {
         return pathCluster;
+    }
+
+    public float[][] getpInf() {
+        return pInf;
+    }
+
+    public float[][] getBpInf() {
+        return bpInf;
     }
 
     public float getTotalYInfluence() {
@@ -154,6 +167,8 @@ public class InfluenceMap {
                 potentialMap[i][j] = 0;
                 pillCluster[i][j] = 0;
                 pathCluster[i][j] = 0;
+                pInf[i][j] = 0;
+                bpInf[i][j] = 0;
             }
         }
 
@@ -181,6 +196,34 @@ public class InfluenceMap {
             }
         }
 
+        boolean hasBonusPills = gameState.getBonusPills().size() > 0;
+        for (XY bonusPill : gameState.getBonusPills()) {
+            float sideBonus = 0f;
+            if (bonusPill.y == 16) {
+                sideBonus = 1f;
+            }
+            float[][] inf = Influence.getInfluence(gameState, bonusPill, new ExponentialFalloff());
+            for (int x = 0; x < Constants.WIDTH; x++) {
+                for (int y = 0; y < Constants.HEIGHT; y++) {
+                    bpInf[x][y] += inf[x][y] + sideBonus;
+                }
+            }
+        }
+        if (hasBonusPills) {
+            bpInf = Util.normalize(bpInf);
+        }
+
+        for (XY pill : gameState.getPills()) {
+            float sideBonus = pill.x + pill.y;
+            float[][] inf = Influence.getInfluence(gameState, pill, new ExponentialFalloff());
+            for (int x = 0; x < Constants.WIDTH; x++) {
+                for (int y = 0; y < Constants.HEIGHT; y++) {
+                    pInf[x][y] += inf[x][y] + sideBonus;
+                }
+            }
+        }
+        pInf = Util.normalize(pInf);
+
         // calculate and normalize influence maps
         float influenceYMax = 0;
         float influenceOMax = 0;
@@ -201,13 +244,13 @@ public class InfluenceMap {
 
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                influenceYMap[i][j] /= influenceYMax;
+                //influenceYMap[i][j] /= influenceYMax;
+                //influenceOMap[i][j] /= influenceOMax;
                 if (influenceYMap[i][j] > 0) {
                     totalYInfluence += influenceYMap[i][j];
                 } else if (influenceYMap[i][j] < 0) {
                     totalOInfluence += Math.abs(influenceYMap[i][j]);
                 }
-                influenceOMap[i][j] /= influenceOMax;
             }
         }
 
@@ -226,7 +269,11 @@ public class InfluenceMap {
                 yPotentialMap[i][j] = yInfluenceMap[i][j] * potentialMap[i][j];
                 oPotentialMap[i][j] = oInfluenceMap[i][j] * potentialMap[i][j];
                 
-                potentialYMap[i][j] = yPotentialMap[i][j] - oPotentialMap[i][j];
+                //potentialYMap[i][j] = yPotentialMap[i][j] - oPotentialMap[i][j];
+                //potentialYMap[i][j] = yInfluenceMap[i][j] * (pInf[i][j] + bpInf[i][j] *2 + pillCluster[i][j]);
+                //potentialYMap[i][j] = pillCluster[i][j] + pInf[i][j] + bpInf[i][j]*2;
+               // potentialYMap[i][j] = pInf[i][j];// + (hasBonusPills ? bpInf[i][j] * 2 : 0);
+                potentialYMap[i][j] = pillCluster[i][j] + pInf[i][j] + bpInf[i][j];
                 if (potentialYMap[i][j] > potentialYMax) {
                     potentialYMax = potentialYMap[i][j];
                 }
@@ -255,13 +302,13 @@ public class InfluenceMap {
 
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                potentialYMap[i][j] /= potentialYMax;
+               // potentialYMap[i][j] /= potentialYMax;
+                potentialOMap[i][j] /= potentialOMax;
                 if (potentialYMap[i][j] > 0) {
                     totalYPotential += potentialYMap[i][j];
                 } else if (potentialYMap[i][j] < 0) {
                     totalOPotential += Math.abs(potentialYMap[i][j]);
                 }
-                potentialOMap[i][j] /= potentialOMax;
             }
         }
 
@@ -276,17 +323,45 @@ public class InfluenceMap {
                 }
             }
         }
+        potentialYMap = Util.normalize(potentialYMap);
         //logger.debug("Influence map generation took [" + (System.currentTimeMillis() - start) + "ms]");
     }
 
     private static float falloff(float dist) {
-        //return 1 / (float) Math.pow(dist == 0 ? 1f : dist, 0.1);
-        return Math.min(1, 1 - dist / (Constants.MAX_MAZE_DIST));
+        return (float) Math.pow(0.9, dist);
+        //return Math.min(1, 1 - dist / (Constants.MAX_MAZE_DIST));
     }
 
     public static InfluenceMap forGameState(GameState gameState) {
         InfluenceMap influenceMap = new InfluenceMap();
         influenceMap.generate(gameState);
         return influenceMap;
+    }
+    
+    public InfluenceMap clone() {
+        InfluenceMap clone = new InfluenceMap();
+        clone.yInfluenceMap = Util.clone(yInfluenceMap);
+        clone.oInfluenceMap = Util.clone(oInfluenceMap);
+        clone.influenceYMap = Util.clone(influenceYMap);
+        clone.influenceOMap = Util.clone(influenceOMap);
+        clone.tensionMap = Util.clone(tensionMap);
+        clone.vulnerabilityMap = Util.clone(vulnerabilityMap);
+        clone.potentialMap = Util.clone(potentialMap);
+        clone.yPotentialMap = Util.clone(yPotentialMap);
+        clone.oPotentialMap = Util.clone(oPotentialMap);
+        clone.potentialYMap = Util.clone(potentialYMap);
+        clone.potentialOMap = Util.clone(potentialOMap);
+        clone.pillCluster = Util.clone(pillCluster);
+        clone.pathCluster = Util.clone(pathCluster);
+        clone.pInf = Util.clone(pInf);
+        clone.bpInf = Util.clone(bpInf);
+        clone.frontLine = frontLine;
+        clone.maxTension = maxTension;
+        clone.maxVulnerability = maxVulnerability;
+        clone.totalYInfluence = totalYInfluence;
+        clone.totalOInfluence = totalOInfluence;
+        clone.totalYPotential = totalYPotential;
+        clone.totalOPotential = totalOPotential;
+        return clone;
     }
 }

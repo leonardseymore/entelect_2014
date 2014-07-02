@@ -154,6 +154,7 @@ public class GUI extends JFrame implements Runnable {
                 }
                 if (keyboard.keyDownOnce(KeyEvent.VK_D)) {
                     Util.writeTmpMaze(game.getGameState());
+                    Util.writeInfluenceMapToExperiments(game.getGameState());
                 }
                 if (keyboard.keyDownOnce(KeyEvent.VK_X)) {
                     drawDebugInfo = !drawDebugInfo;

@@ -14,6 +14,9 @@ public class PillCluster {
 
     public static float[][] getCellPotential(GameState gameState) {
         Map<XY, Integer> pills = getClusteredPills(gameState);
+        if (pills.size() == 0) {
+            return new float[Constants.WIDTH][Constants.HEIGHT];
+        }
         Map<XY, Integer> spaces = getClusteredSpaces(gameState);
 
         int maxPillValue = 0;
@@ -131,7 +134,7 @@ public class PillCluster {
                 }
                 for (SearchNode searchNode : Search.getAvailableNeighbors(gameState, new SearchNode(cell))) {
                     char c = gameState.getCell(cell);
-                    if (!cells.contains(searchNode.pos) || c != Constants.SPACE) {
+                    if (!cells.contains(searchNode.pos) || (c != Constants.SPACE && c != Constants.PLAYER_A && c != Constants.PLAYER_B)) {
                         continue cells;
                     }
                 }
