@@ -34,6 +34,7 @@ public class InfluenceMap implements Cloneable {
     private float[][] potentialYMap;
     private float[][] potentialOMap;
     private float[][] pillCluster;
+    private int[][] pillClusters;
     private float[][] pathCluster;
     private float[][] pInf;
     private float[][] bpInf;
@@ -44,6 +45,7 @@ public class InfluenceMap implements Cloneable {
     private float totalOInfluence;
     private float totalYPotential;
     private float totalOPotential;
+    int biggestPillCluster;
 
     public InfluenceMap() {
         w = Constants.WIDTH;
@@ -59,6 +61,7 @@ public class InfluenceMap implements Cloneable {
         potentialMap = new float[w][h];
         tensionMap = new float[w][h];
         pillCluster = new float[w][h];
+        pillClusters = new int[w][h];
         pathCluster = new float[w][h];
         pInf = new float[w][h];
         bpInf = new float[w][h];
@@ -156,6 +159,15 @@ public class InfluenceMap implements Cloneable {
         return potentialMap;
     }
 
+
+    public int[][] getPillClusters() {
+        return pillClusters;
+    }
+
+    public boolean inBiggestPillCluster(XY pos) {
+        return pillClusters[pos.x][pos.y] == biggestPillCluster;
+    }
+
     public void generate(GameState gameState) {
         long start = System.currentTimeMillis();
 
@@ -166,9 +178,20 @@ public class InfluenceMap implements Cloneable {
                 oInfluenceMap[i][j] = 0;
                 potentialMap[i][j] = 0;
                 pillCluster[i][j] = 0;
+                pillClusters[i][j] = 0;
                 pathCluster[i][j] = 0;
                 pInf[i][j] = 0;
                 bpInf[i][j] = 0;
+            }
+        }
+
+        pillClusters = PillCluster.getClusterSize(gameState);
+        biggestPillCluster = 0;
+        for (int j = 0; j < h; j++) {
+            for (int i = 0; i < w; i++) {
+                if (pillClusters[i][j] > biggestPillCluster) {
+                    biggestPillCluster = pillClusters[i][j];
+                }
             }
         }
 
@@ -278,7 +301,7 @@ public class InfluenceMap implements Cloneable {
                 //potentialYMap[i][j] = yInfluenceMap[i][j] * (pInf[i][j] + bpInf[i][j] *2 + pillCluster[i][j]);
                 //potentialYMap[i][j] = pillCluster[i][j] + pInf[i][j] + bpInf[i][j]*2;
                // potentialYMap[i][j] = pInf[i][j];// + (hasBonusPills ? bpInf[i][j] * 2 : 0);
-                potentialYMap[i][j] = pillCluster[i][j] + pInf[i][j] + bpInf[i][j];
+                potentialYMap[i][j] = pillCluster[i][j] + pInf[i][j] + bpInf[i][j] + (pillClusters[i][j] / (float) biggestPillCluster);
                 if (potentialYMap[i][j] > potentialYMax) {
                     potentialYMax = potentialYMap[i][j];
                 }
@@ -357,6 +380,7 @@ public class InfluenceMap implements Cloneable {
         clone.potentialYMap = Util.clone(potentialYMap);
         clone.potentialOMap = Util.clone(potentialOMap);
         clone.pillCluster = Util.clone(pillCluster);
+        clone.pillClusters = Util.clone(pillClusters);
         clone.pathCluster = Util.clone(pathCluster);
         clone.pInf = Util.clone(pInf);
         clone.bpInf = Util.clone(bpInf);
@@ -367,6 +391,7 @@ public class InfluenceMap implements Cloneable {
         clone.totalOInfluence = totalOInfluence;
         clone.totalYPotential = totalYPotential;
         clone.totalOPotential = totalOPotential;
+        clone.biggestPillCluster = biggestPillCluster;
         return clone;
     }
 }

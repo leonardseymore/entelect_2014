@@ -16,7 +16,7 @@ public class MoveToClosestNodeMatch extends Task {
     private boolean tactical;
 
     public MoveToClosestNodeMatch(SearchCriteria searchCriteria) {
-        this(searchCriteria, false);
+        this(searchCriteria, true);
     }
 
     public MoveToClosestNodeMatch(SearchCriteria searchCriteria, boolean tactical) {

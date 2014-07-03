@@ -197,6 +197,12 @@ public class PillCluster {
             }
             clusters.add(closed);
         }
+        Collections.sort(clusters, new Comparator<Collection<SearchNode>>() {
+            @Override
+            public int compare(Collection<SearchNode> o1, Collection<SearchNode> o2) {
+                return o1.size() > o2.size() ? -1 : o1.size() < o2.size() ? 1 : 0;
+            }
+        });
         return clusters;
     }
 

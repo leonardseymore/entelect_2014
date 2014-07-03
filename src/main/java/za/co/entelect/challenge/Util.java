@@ -170,6 +170,14 @@ public class Util {
         return clone;
     }
 
+    public static int[][] clone(int[][] val) {
+        int[][] clone = new int[val.length][val[0].length];
+        for (int i = 0; i < val.length; i++) {
+            System.arraycopy(val[i], 0, clone[i], 0, val[0].length);
+        }
+        return clone;
+    }
+
     public static float[][] clone(float[][] val) {
         float[][] clone = new float[val.length][val[0].length];
         for (int i = 0; i < Constants.WIDTH; i++) {
