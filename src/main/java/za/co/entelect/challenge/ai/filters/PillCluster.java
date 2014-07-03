@@ -111,7 +111,6 @@ public class PillCluster {
         }
 
         Map<XY, Integer> clusters = new HashMap<>();
-        XY maxPill = null;
         for (XY pos : allCells) {
             clusters.put(pos, Collections.frequency(seen, pos));
         }

@@ -19,24 +19,26 @@ public class PlayOffs {
 
     private static final List<PacmanAgent> AGENTS = new ArrayList<>();
     static {
+        AGENTS.add(new Zebra());
         AGENTS.add(new Greedie());
-//        AGENTS.add(new GreedieTactics());
-//        AGENTS.add(new Greedy());
-//        AGENTS.add(new Layzie());
-//        AGENTS.add(new Layzy());
-//        AGENTS.add(new LayzyTactics());
+        AGENTS.add(new GreedieTactics());
+        AGENTS.add(new Greedy());
+        AGENTS.add(new Layzie());
+        AGENTS.add(new Layzy());
+        AGENTS.add(new LayzyTactics());
         //AGENTS.add(new Dummie());
         //AGENTS.add(new Eddie());
-//        AGENTS.add(new Kungus());
-//        AGENTS.add(new Vladimir());
-//        AGENTS.add(new Angus());
-//        AGENTS.add(new Hayw1r3d());
-//        AGENTS.add(new Attack());
+        AGENTS.add(new Kungus());
+        AGENTS.add(new Vladimir());
+        AGENTS.add(new Angus());
+        AGENTS.add(new Hayw1r3d());
+        AGENTS.add(new Attack());
         //AGENTS.add(new Naratu());
-        //AGENTS.add(new Eek());
+        AGENTS.add(new Eek());
         //AGENTS.add(new Mandy());
         //AGENTS.add(new Epa());
-        AGENTS.add(new Rover());
+        //AGENTS.add(new Rover());
+
     }
 
     private GameState initialGameState;

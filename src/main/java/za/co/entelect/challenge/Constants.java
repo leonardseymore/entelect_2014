@@ -25,6 +25,8 @@ public class Constants {
 
     public static final int WIDTH = 19;
     public static final int HEIGHT = 22;
+    public static final int MX = 10;
+    public static final int MY = 11;
     public static final int PORTAL_X = 9;
     public static final int PORTAL_Y = 10;
     public static final XY PORTAL = new XY(PORTAL_X, PORTAL_Y);

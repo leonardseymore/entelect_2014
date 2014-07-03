@@ -196,6 +196,10 @@ public class InfluenceMap implements Cloneable {
             }
         }
 
+        XY ypos = gameState.getCurrentPosition();
+        boolean leftBonus = ypos.x < Constants.MX;
+        boolean downBonus = ypos.y < Constants.MY;
+
         boolean hasBonusPills = gameState.getBonusPills().size() > 0;
         for (XY bonusPill : gameState.getBonusPills()) {
             float sideBonus = 0f;
@@ -214,7 +218,8 @@ public class InfluenceMap implements Cloneable {
         }
 
         for (XY pill : gameState.getPills()) {
-            float sideBonus = pill.x + pill.y;
+            float sideBonus = leftBonus ? Constants.WIDTH - pill.x : pill.x;
+            sideBonus += downBonus ? Constants.HEIGHT - pill.y : pill.y;
             float[][] inf = Influence.getInfluence(gameState, pill, new ExponentialFalloff());
             for (int x = 0; x < Constants.WIDTH; x++) {
                 for (int y = 0; y < Constants.HEIGHT; y++) {
