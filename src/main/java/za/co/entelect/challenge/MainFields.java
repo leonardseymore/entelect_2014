@@ -15,6 +15,7 @@ import za.co.entelect.challenge.groovy.GameFactory;
 import javax.sound.sampled.Line;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
+import java.util.Collection;
 
 public class MainFields {
 
@@ -67,5 +68,8 @@ public class MainFields {
         }
         logger.debug("Total Pill Influence:\n{}\n", Util.toSv(Util.normalize(pillSumInf)));
         Util.writeToFile(directory, "p_sum_inf.txt", Util.toSv(pillSumInf));
+
+        int[][] clusterSizes = PillCluster.getClusterSize(gameState);
+        logger.debug("Cluster sizes:\n{}\n", Util.toSv(clusterSizes));
     }
 }

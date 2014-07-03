@@ -37,7 +37,7 @@ public class MoveToHighestPathPotential extends Task {
         if (debug) {
             for (float[] potential : potentials) {
                 for (float v : potential) {
-                    System.out.print( v + " ");
+                    System.out.print(((int)(v * 255)) + " ");
                 }
                 System.out.println("");
             }

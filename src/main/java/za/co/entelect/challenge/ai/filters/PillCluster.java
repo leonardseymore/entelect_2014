@@ -150,4 +150,64 @@ public class PillCluster {
 
         return clusters;
     }
+
+    private static PillCluster.TestNeighbor testNeighbor = new TestNeighbor();
+    private static class TestNeighbor extends Search.TestNeighbor {
+        @Override
+        public void testNeighbor(GameState gameState, SearchNode node, XY moveTo, Collection<SearchNode> neighbors) {
+            char c = gameState.getCell(moveTo);
+            if (c != Constants.PILL && c != Constants.BONUS_PILL) {
+                return;
+            }
+            super.testNeighbor(gameState, node, moveTo, neighbors);
+        }
+    }
+
+    public static List<Collection<SearchNode>> getClusters(GameState gameState) {
+        Set<XY> allPills = Util.getAllPills(gameState);
+
+        List<Collection<SearchNode>> clusters = new ArrayList<>();
+        while (!allPills.isEmpty()) {
+            XY start = allPills.iterator().next();
+            Queue<SearchNode> open = new PriorityQueue<>();
+            SearchNode initialNode = new SearchNode(start);
+            open.add(initialNode);
+            Collection<SearchNode> closed = new HashSet<>();
+            while (!open.isEmpty()) {
+                SearchNode currentNode = open.poll();
+                for (SearchNode node : Search.getAvailableNeighbors(gameState, currentNode, testNeighbor)) {
+                    float estRunningCost = currentNode.runningCost + node.runningCost;
+                    if (closed.contains(node)) {
+                        assert node.runningCost <= estRunningCost;
+                        continue;
+                    } else if (open.contains(node)) {
+                        if (node.runningCost <= estRunningCost) {
+                            continue;
+                        }
+                    } else {
+                        node.runningCost = estRunningCost;
+                        if (!open.contains(node)) {
+                            open.add(node);
+                        }
+                    }
+                }
+                open.remove(currentNode);
+                closed.add(currentNode);
+                allPills.remove(currentNode.pos);
+            }
+            clusters.add(closed);
+        }
+        return clusters;
+    }
+
+    public static int[][] getClusterSize(GameState gameState) {
+        int[][] result = new int[Constants.WIDTH][Constants.HEIGHT];
+        List<Collection<SearchNode>> clusters = getClusters(gameState);
+        for (Collection<SearchNode> cluster : clusters) {
+            for (SearchNode node : cluster) {
+                result[node.pos.x][node.pos.y] = cluster.size();
+            }
+        }
+        return result;
+    }
 }

@@ -344,6 +344,26 @@ public class Util {
         return buffer.toString();
     }
 
+    public static String toSv(int[][] field) {
+        return toSv(field, " ");
+    }
+
+    public static String toSv(int[][] field, String delimeter) {
+        StringBuilder buffer = new StringBuilder();
+        for (int y = 0; y < Constants.HEIGHT; y++) {
+            for (int x = 0; x < Constants.WIDTH; x++) {
+                buffer.append(field[x][y]);
+                if (x != Constants.WIDTH - 1) {
+                    buffer.append(delimeter);
+                }
+            }
+            if (y != Constants.HEIGHT - 1) {
+                buffer.append("\n");
+            }
+        }
+        return buffer.toString();
+    }
+
     public static String toSv(float[][] field) {
         return toSv(field, " ");
     }
