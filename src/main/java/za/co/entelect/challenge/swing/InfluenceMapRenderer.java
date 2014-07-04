@@ -131,6 +131,8 @@ public class InfluenceMapRenderer {
                         } else if (val < 0) {
                             color = Color.getHSBColor(1f, 1, Math.min(1f, Math.abs(val)));
                         }
+                        g.setColor(Color.white);
+                        Draw.drawString(g, x, y, String.format("%.2f", val));
                         break;
                     case POTENTIALO:
                         influenceMap = imap.getPotentialOMap();

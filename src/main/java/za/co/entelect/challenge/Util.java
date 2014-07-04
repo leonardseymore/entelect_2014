@@ -327,8 +327,8 @@ public class Util {
         Util.writeToFile(directory, "o_inf.txt", Util.toSv(influenceMap.getoInfluenceMap()));
         Util.writeToFile(directory, "pill_cluster.txt", Util.toSv(influenceMap.getPillCluster()));
         //Util.writeToFile(directory, "bp" + bpNum + "_inf.txt", Util.toSv(bpInf));
-        Util.writeToFile(directory, "bp_sum_inf.txt", Util.toSv(influenceMap.getBpInf()));
-        Util.writeToFile(directory, "p_sum_inf.txt", Util.toSv(influenceMap.getpInf()));
+        Util.writeToFile(directory, "bp_sum_inf.txt", Util.toSv(influenceMap.getyBpInf()));
+        Util.writeToFile(directory, "p_sum_inf.txt", Util.toSv(influenceMap.getypInf()));
     }
 
     public static String toMathematica(float[][] field) {
