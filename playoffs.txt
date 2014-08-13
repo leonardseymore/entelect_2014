@@ -1,0 +1,305 @@
+/usr/lib/jvm/java-7-openjdk-amd64/bin/java -Didea.launcher.port=7532 -Didea.launcher.bin.path=/home/seymor_l/Applications/idea-IU-135.909/bin -Dfile.encoding=UTF-8 -classpath /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/javazic.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/management-agent.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/compilefontconfig.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/localedata.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/java-atk-wrapper.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunpkcs11.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/pulse-java.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/zipfs.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/dnsns.jar:/home/seymor_l/src/trunk/pacman/target/classes:/home/seymor_l/.m2/repository/ch/qos/logback/logback-classic/1.1.2/logback-classic-1.1.2.jar:/home/seymor_l/.m2/repository/ch/qos/logback/logback-core/1.1.2/logback-core-1.1.2.jar:/home/seymor_l/.m2/repository/org/slf4j/slf4j-api/1.7.6/slf4j-api-1.7.6.jar:/home/seymor_l/.m2/repository/org/codehaus/groovy/groovy-all/2.1.3/groovy-all-2.1.3.jar:/home/seymor_l/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/home/seymor_l/.m2/repository/org/fusesource/jansi/jansi/1.2.1/jansi-1.2.1.jar:/home/seymor_l/.m2/repository/com/codahale/metrics/metrics-core/3.0.1/metrics-core-3.0.1.jar:/home/seymor_l/.m2/repository/org/optaplanner/optaplanner-core/6.0.1.Final/optaplanner-core-6.0.1.Final.jar:/home/seymor_l/.m2/repository/org/kie/kie-api/6.0.1.Final/kie-api-6.0.1.Final.jar:/home/seymor_l/.m2/repository/org/kie/kie-internal/6.0.1.Final/kie-internal-6.0.1.Final.jar:/home/seymor_l/.m2/repository/org/drools/drools-core/6.0.1.Final/drools-core-6.0.1.Final.jar:/home/seymor_l/.m2/repository/org/mvel/mvel2/2.1.8.Final/mvel2-2.1.8.Final.jar:/home/seymor_l/.m2/repository/org/drools/drools-compiler/6.0.1.Final/drools-compiler-6.0.1.Final.jar:/home/seymor_l/.m2/repository/org/antlr/antlr-runtime/3.5/antlr-runtime-3.5.jar:/home/seymor_l/.m2/repository/org/eclipse/jdt/core/compiler/ecj/3.7.2/ecj-3.7.2.jar:/home/seymor_l/.m2/repository/com/thoughtworks/xstream/xstream/1.4.3/xstream-1.4.3.jar:/home/seymor_l/.m2/repository/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar:/home/seymor_l/.m2/repository/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar:/home/seymor_l/.m2/repository/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar:/home/seymor_l/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/home/seymor_l/.m2/repository/commons-io/commons-io/2.1/commons-io-2.1.jar:/home/seymor_l/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar:/home/seymor_l/Applications/idea-IU-135.909/lib/idea_rt.jar com.intellij.rt.execution.application.AppMain za.co.entelect.challenge.PlayOffs
+12:01:09.007 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(121),B=Zebra(98),WINNER=A
+12:01:10.751 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(127),B=Greedie(92),WINNER=A
+12:01:12.351 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(132),B=GreedieTactics(87),WINNER=A
+12:01:13.957 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(116),B=Greedy(103),WINNER=A
+12:01:15.565 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(124),B=Layzie(95),WINNER=A
+12:01:17.133 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(124),B=Layzy(95),WINNER=A
+12:01:18.713 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(124),B=LayzyTactics(95),WINNER=A
+12:01:20.288 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(113),B=Kungus(106),WINNER=A
+12:01:22.010 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(122),B=Vladimir(97),WINNER=A
+12:01:23.108 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 299ms with a best score of -4 and a move of {x=9, y=8}
+12:01:23.348 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 222ms with a best score of -3 and a move of {x=8, y=8}
+12:01:23.492 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 127ms with a best score of -3 and a move of {x=8, y=7}
+12:01:24.168 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 102ms with a best score of -8 and a move of {x=6, y=18}
+12:01:24.463 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 101ms with a best score of -29 and a move of {x=1, y=6}
+12:01:24.465 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(124),B=Angus(95),WINNER=A
+12:01:25.945 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(126),B=Hayw1r3d(93),WINNER=A
+12:01:27.560 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(110),B=Attack(109),WINNER=A
+12:01:42.057 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Zebra(107),B=Eek(112),WINNER=B
+12:01:43.734 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(104),B=Zebra(115),WINNER=B
+12:01:45.364 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(105),B=Greedie(114),WINNER=B
+12:01:47.063 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(100),B=GreedieTactics(119),WINNER=B
+12:01:48.796 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(101),B=Greedy(118),WINNER=B
+12:01:50.720 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(93),B=Layzie(126),WINNER=B
+12:01:52.471 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(97),B=Layzy(122),WINNER=B
+12:01:54.286 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(97),B=LayzyTactics(122),WINNER=B
+12:01:56.017 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(97),B=Kungus(122),WINNER=B
+12:01:57.920 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(93),B=Vladimir(126),WINNER=B
+12:02:00.298 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 92ms with a best score of 3 and a move of {x=3, y=18}
+12:02:00.300 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(108),B=Angus(111),WINNER=B
+12:02:02.123 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie,B=Hayw1r3d:MAX_MOVES_NO_PILLS
+12:02:04.031 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(117),B=Attack(102),WINNER=A
+12:02:20.975 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedie(108),B=Eek(111),WINNER=B
+12:02:22.549 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(105),B=Zebra(114),WINNER=B
+12:02:24.204 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(100),B=Greedie(119),WINNER=B
+12:02:25.687 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(109),B=GreedieTactics(110),WINNER=B
+12:02:27.157 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(109),B=Greedy(110),WINNER=B
+12:02:28.623 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(112),B=Layzie(107),WINNER=A
+12:02:30.116 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(101),B=Layzy(118),WINNER=B
+12:02:31.572 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(101),B=LayzyTactics(118),WINNER=B
+12:02:33.050 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(98),B=Kungus(121),WINNER=B
+12:02:34.526 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(98),B=Vladimir(121),WINNER=B
+12:02:35.989 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 210ms with a best score of 4 and a move of {x=10, y=12}
+12:02:36.050 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 54ms with a best score of 4 and a move of {x=11, y=12}
+12:02:36.593 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 496ms with a best score of 9 and a move of {x=9, y=16}
+12:02:36.739 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(99),B=Angus(120),WINNER=B
+12:02:38.273 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(118),B=Hayw1r3d(101),WINNER=A
+12:02:39.815 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(124),B=Attack(95),WINNER=A
+12:02:51.113 [main] INFO  za.co.entelect.challenge.PlayOffs - A=GreedieTactics(103),B=Eek(116),WINNER=B
+12:02:52.593 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(99),B=Zebra(120),WINNER=B
+12:02:54.143 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(104),B=Greedie(115),WINNER=B
+12:02:55.627 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(109),B=GreedieTactics(110),WINNER=B
+12:02:57.116 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(109),B=Greedy(110),WINNER=B
+12:02:58.748 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(100),B=Layzie(119),WINNER=B
+12:03:00.398 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(100),B=Layzy(119),WINNER=B
+12:03:02.042 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(100),B=LayzyTactics(119),WINNER=B
+12:03:03.667 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(100),B=Kungus(119),WINNER=B
+12:03:05.301 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(100),B=Vladimir(119),WINNER=B
+12:03:07.762 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 2ms with a best score of 45 and a move of {x=7, y=20}
+12:03:07.762 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(132),B=Angus(87),WINNER=A
+12:03:09.564 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(95),B=Hayw1r3d(124),WINNER=B
+12:03:11.411 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(126),B=Attack(93),WINNER=A
+12:03:24.756 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Greedy(107),B=Eek(112),WINNER=B
+12:03:26.121 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(105),B=Zebra(114),WINNER=B
+12:03:27.862 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(121),B=Greedie(98),WINNER=A
+12:03:29.512 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(91),B=GreedieTactics(128),WINNER=B
+12:03:31.107 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(101),B=Greedy(118),WINNER=B
+12:03:32.595 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(91),B=Layzie(128),WINNER=B
+12:03:34.086 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(91),B=Layzy(128),WINNER=B
+12:03:35.581 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(91),B=LayzyTactics(128),WINNER=B
+12:03:37.471 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(105),B=Kungus(114),WINNER=B
+12:03:39.301 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(110),B=Vladimir(109),WINNER=A
+12:03:40.310 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 367ms with a best score of 10 and a move of {x=14, y=4}
+12:03:40.540 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 102ms with a best score of 4 and a move of {x=12, y=4}
+12:03:40.722 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 160ms with a best score of 4 and a move of {x=11, y=4}
+12:03:41.898 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 511ms with a best score of -4 and a move of {x=13, y=16}
+12:03:42.279 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 65ms with a best score of -27 and a move of {x=4, y=16}
+12:03:42.424 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(130),B=Angus(89),WINNER=A
+12:03:44.313 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(102),B=Hayw1r3d(117),WINNER=B
+12:03:45.948 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(108),B=Attack(111),WINNER=B
+12:04:00.120 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzie(101),B=Eek(118),WINNER=B
+12:04:01.518 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(105),B=Zebra(114),WINNER=B
+12:04:03.366 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(120),B=Greedie(99),WINNER=A
+12:04:04.942 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(98),B=GreedieTactics(121),WINNER=B
+12:04:06.540 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(101),B=Greedy(118),WINNER=B
+12:04:08.264 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(81),B=Layzie(138),WINNER=B
+12:04:09.838 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(81),B=Layzy(138),WINNER=B
+12:04:11.525 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(81),B=LayzyTactics(138),WINNER=B
+12:04:13.032 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(103),B=Kungus(116),WINNER=B
+12:04:15.003 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(115),B=Vladimir(104),WINNER=A
+12:04:16.047 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 357ms with a best score of 11 and a move of {x=12, y=5}
+12:04:16.537 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 467ms with a best score of 11 and a move of {x=12, y=6}
+12:04:16.851 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 294ms with a best score of 12 and a move of {x=11, y=6}
+12:04:17.544 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 116ms with a best score of 29 and a move of {x=13, y=16}
+12:04:18.014 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 125ms with a best score of 2 and a move of {x=4, y=15}
+12:04:18.165 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 145ms with a best score of 3 and a move of {x=4, y=16}
+12:04:18.341 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 171ms with a best score of 3 and a move of {x=5, y=16}
+12:04:18.678 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 332ms with a best score of 3 and a move of {x=6, y=16}
+12:04:19.440 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 757ms with a best score of 3 and a move of {x=5, y=16}
+12:04:19.536 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(115),B=Angus(104),WINNER=A
+12:04:21.252 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(101),B=Hayw1r3d(118),WINNER=B
+12:04:22.810 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(108),B=Attack(111),WINNER=B
+12:04:35.869 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Layzy(101),B=Eek(118),WINNER=B
+12:04:37.327 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(105),B=Zebra(114),WINNER=B
+12:04:39.221 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(120),B=Greedie(99),WINNER=A
+12:04:40.832 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(98),B=GreedieTactics(121),WINNER=B
+12:04:42.575 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(98),B=Greedy(121),WINNER=B
+12:04:44.335 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(92),B=Layzie(127),WINNER=B
+12:04:46.023 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(97),B=Layzy(122),WINNER=B
+12:04:47.814 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(97),B=LayzyTactics(122),WINNER=B
+12:04:49.461 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(103),B=Kungus(116),WINNER=B
+12:04:51.150 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(115),B=Vladimir(104),WINNER=A
+12:04:52.258 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 370ms with a best score of 11 and a move of {x=12, y=5}
+12:04:52.769 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 490ms with a best score of 11 and a move of {x=12, y=6}
+12:04:53.082 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 294ms with a best score of 12 and a move of {x=11, y=6}
+12:04:53.790 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 109ms with a best score of 29 and a move of {x=13, y=16}
+12:04:54.234 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 116ms with a best score of 2 and a move of {x=4, y=15}
+12:04:54.397 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 158ms with a best score of 3 and a move of {x=4, y=16}
+12:04:54.590 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 189ms with a best score of 3 and a move of {x=5, y=16}
+12:04:54.933 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 339ms with a best score of 3 and a move of {x=6, y=16}
+12:04:55.579 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 641ms with a best score of 3 and a move of {x=5, y=16}
+12:04:55.671 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(115),B=Angus(104),WINNER=A
+12:04:57.373 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(100),B=Hayw1r3d(119),WINNER=B
+12:04:58.921 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(108),B=Attack(111),WINNER=B
+12:05:12.965 [main] INFO  za.co.entelect.challenge.PlayOffs - A=LayzyTactics(101),B=Eek(118),WINNER=B
+12:05:14.423 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(105),B=Zebra(114),WINNER=B
+12:05:16.316 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(119),B=Greedie(100),WINNER=A
+12:05:17.922 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(98),B=GreedieTactics(121),WINNER=B
+12:05:19.608 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(98),B=Greedy(121),WINNER=B
+12:05:21.341 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(95),B=Layzie(124),WINNER=B
+12:05:23.070 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(97),B=Layzy(122),WINNER=B
+12:05:24.737 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(97),B=LayzyTactics(122),WINNER=B
+12:05:26.374 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(101),B=Kungus(118),WINNER=B
+12:05:27.980 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(101),B=Vladimir(118),WINNER=B
+12:05:28.958 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 322ms with a best score of 11 and a move of {x=12, y=5}
+12:05:29.392 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 416ms with a best score of 11 and a move of {x=12, y=6}
+12:05:29.706 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 293ms with a best score of 12 and a move of {x=11, y=6}
+12:05:30.348 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 105ms with a best score of 29 and a move of {x=13, y=16}
+12:05:30.734 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(101),B=Angus(118),WINNER=B
+12:05:32.379 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(100),B=Hayw1r3d(119),WINNER=B
+12:05:34.041 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(108),B=Attack(111),WINNER=B
+12:05:47.135 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Kungus(101),B=Eek(118),WINNER=B
+12:05:48.647 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(105),B=Zebra(114),WINNER=B
+12:05:50.446 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(121),B=Greedie(98),WINNER=A
+12:05:52.147 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(91),B=GreedieTactics(128),WINNER=B
+12:05:53.878 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(99),B=Greedy(120),WINNER=B
+12:05:55.437 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(91),B=Layzie(128),WINNER=B
+12:05:57.043 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(91),B=Layzy(128),WINNER=B
+12:05:58.578 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(91),B=LayzyTactics(128),WINNER=B
+12:06:00.355 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(105),B=Kungus(114),WINNER=B
+12:06:02.127 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(110),B=Vladimir(109),WINNER=A
+12:06:03.058 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 309ms with a best score of 10 and a move of {x=14, y=4}
+12:06:03.291 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 109ms with a best score of 4 and a move of {x=12, y=4}
+12:06:03.468 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 157ms with a best score of 4 and a move of {x=11, y=4}
+12:06:04.383 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 362ms with a best score of -4 and a move of {x=13, y=16}
+12:06:04.703 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 54ms with a best score of -27 and a move of {x=4, y=16}
+12:06:04.827 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(130),B=Angus(89),WINNER=A
+12:06:06.443 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(102),B=Hayw1r3d(117),WINNER=B
+12:06:08.110 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(108),B=Attack(111),WINNER=B
+12:06:20.946 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Vladimir(101),B=Eek(118),WINNER=B
+12:06:22.306 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(105),B=Zebra(114),WINNER=B
+12:06:24.061 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 63ms with a best score of -22 and a move of {x=8, y=8}
+12:06:24.609 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 184ms with a best score of -41 and a move of {x=9, y=16}
+12:06:24.717 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 16ms with a best score of 31 and a move of {x=1, y=20}
+12:06:24.717 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(94),B=Greedie(125),WINNER=B
+12:06:26.299 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(89),B=GreedieTactics(130),WINNER=B
+12:06:28.223 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(89),B=Greedy(130),WINNER=B
+12:06:29.947 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 364ms with a best score of -32 and a move of {x=6, y=14}
+12:06:30.194 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 180ms with a best score of -27 and a move of {x=4, y=12}
+12:06:30.365 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 164ms with a best score of -27 and a move of {x=4, y=13}
+12:06:30.875 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 502ms with a best score of -18 and a move of {x=4, y=14}
+12:06:31.073 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(104),B=Layzie(115),WINNER=B
+12:06:32.833 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 49ms with a best score of -59 and a move of {x=4, y=16}
+12:06:32.956 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(73),B=Layzy(146),WINNER=B
+12:06:34.889 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 408ms with a best score of -32 and a move of {x=6, y=14}
+12:06:35.135 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 179ms with a best score of -27 and a move of {x=4, y=12}
+12:06:35.325 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 182ms with a best score of -27 and a move of {x=4, y=13}
+12:06:35.892 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 559ms with a best score of -18 and a move of {x=4, y=14}
+12:06:36.082 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(104),B=LayzyTactics(115),WINNER=B
+12:06:37.655 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 252ms with a best score of -22 and a move of {x=8, y=16}
+12:06:37.836 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 29ms with a best score of -6 and a move of {x=2, y=18}
+12:06:37.934 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(101),B=Kungus(118),WINNER=B
+12:06:39.502 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 245ms with a best score of -22 and a move of {x=8, y=16}
+12:06:39.683 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 28ms with a best score of -6 and a move of {x=2, y=18}
+12:06:39.782 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(101),B=Vladimir(118),WINNER=B
+12:06:40.736 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 315ms with a best score of 11 and a move of {x=12, y=5}
+12:06:41.172 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 414ms with a best score of 11 and a move of {x=12, y=6}
+12:06:41.474 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 275ms with a best score of 12 and a move of {x=11, y=6}
+12:06:42.108 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 99ms with a best score of 29 and a move of {x=13, y=16}
+12:06:42.473 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 253ms with a best score of -22 and a move of {x=8, y=16}
+12:06:42.664 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 29ms with a best score of -6 and a move of {x=2, y=18}
+12:06:42.765 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(101),B=Angus(118),WINNER=B
+12:06:44.432 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 143ms with a best score of -17 and a move of {x=9, y=10}
+12:06:44.675 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 240ms with a best score of -17 and a move of {x=9, y=11}
+12:06:44.866 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player A MiniMax searched 12 levels in 187ms with a best score of -16 and a move of {x=9, y=12}
+12:06:45.076 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus,B=Hayw1r3d:MAX_MOVES_NO_PILLS
+12:06:46.605 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(108),B=Attack(111),WINNER=B
+12:06:59.369 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Angus(101),B=Eek(118),WINNER=B
+12:07:00.831 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(101),B=Zebra(118),WINNER=B
+12:07:02.573 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d,B=Greedie:MAX_MOVES_NO_PILLS
+12:07:04.133 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(106),B=GreedieTactics(113),WINNER=B
+12:07:05.850 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(124),B=Greedy(95),WINNER=A
+12:07:07.305 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(115),B=Layzie(104),WINNER=A
+12:07:08.874 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(115),B=Layzy(104),WINNER=A
+12:07:10.437 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(115),B=LayzyTactics(104),WINNER=A
+12:07:12.013 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(115),B=Kungus(104),WINNER=A
+12:07:13.457 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(115),B=Vladimir(104),WINNER=A
+12:07:14.747 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 224ms with a best score of -1 and a move of {x=12, y=20}
+12:07:14.910 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 153ms with a best score of -1 and a move of {x=11, y=20}
+12:07:15.038 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 109ms with a best score of -1 and a move of {x=9, y=20}
+12:07:15.209 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 155ms with a best score of -1 and a move of {x=8, y=20}
+12:07:15.362 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 144ms with a best score of -2 and a move of {x=8, y=19}
+12:07:15.519 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 65ms with a best score of 0 and a move of {x=6, y=13}
+12:07:15.641 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 115ms with a best score of 1 and a move of {x=6, y=12}
+12:07:15.878 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(115),B=Angus(104),WINNER=A
+12:07:17.603 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(93),B=Hayw1r3d(126),WINNER=B
+12:07:19.392 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(119),B=Attack(100),WINNER=A
+12:07:35.296 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Hayw1r3d(119),B=Eek(100),WINNER=A
+12:07:36.830 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(94),B=Zebra(125),WINNER=B
+12:07:38.696 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(107),B=Greedie(112),WINNER=B
+12:07:40.182 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(86),B=GreedieTactics(133),WINNER=B
+12:07:42.097 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(107),B=Greedy(112),WINNER=B
+12:07:43.635 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(125),B=Layzie(94),WINNER=A
+12:07:45.150 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(125),B=Layzy(94),WINNER=A
+12:07:46.682 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(125),B=LayzyTactics(94),WINNER=A
+12:07:48.262 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(121),B=Kungus(98),WINNER=A
+12:07:49.828 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(121),B=Vladimir(98),WINNER=A
+12:07:51.373 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 158ms with a best score of -29 and a move of {x=14, y=12}
+12:07:51.524 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(128),B=Angus(91),WINNER=A
+12:07:53.367 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(94),B=Hayw1r3d(125),WINNER=B
+12:07:55.215 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(101),B=Attack(118),WINNER=B
+12:08:10.762 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Attack(105),B=Eek(114),WINNER=B
+12:08:23.930 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(87),B=Zebra(132),WINNER=B
+12:08:38.847 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(111),B=Greedie(108),WINNER=A
+12:08:54.532 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(104),B=GreedieTactics(115),WINNER=B
+12:09:08.836 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(97),B=Greedy(122),WINNER=B
+12:09:21.791 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(123),B=Layzie(96),WINNER=A
+12:09:35.064 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(136),B=Layzy(83),WINNER=A
+12:09:48.329 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(136),B=LayzyTactics(83),WINNER=A
+12:10:01.286 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(123),B=Kungus(96),WINNER=A
+12:10:14.400 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(123),B=Vladimir(96),WINNER=A
+12:10:18.365 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 542ms with a best score of -17 and a move of {x=14, y=12}
+12:10:19.139 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 493ms with a best score of -17 and a move of {x=14, y=13}
+12:10:20.025 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 693ms with a best score of -17 and a move of {x=14, y=14}
+12:10:20.926 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 736ms with a best score of -17 and a move of {x=13, y=14}
+12:10:22.182 [main] DEBUG z.c.e.c.ai.gametree.GameTreeMinimax - MINIMAX: Player B MiniMax searched 12 levels in 47ms with a best score of -18 and a move of {x=7, y=12}
+12:10:29.927 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(123),B=Angus(96),WINNER=A
+12:10:45.392 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(135),B=Hayw1r3d(84),WINNER=A
+12:11:02.489 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(108),B=Attack(111),WINNER=B
+12:11:30.081 [main] INFO  za.co.entelect.challenge.PlayOffs - A=Eek(110),B=Eek(109),WINNER=A
+12:11:30.081 [main] INFO  za.co.entelect.challenge.PlayOffs - The results are out
+12:11:30.081 [main] INFO  za.co.entelect.challenge.PlayOffs - WINNERS:
+{Hayw1r3d=17, Vladimir=8, Layzy=12, Kungus=10, Greedy=13, Angus=4, GreedieTactics=15, LayzyTactics=12, Layzie=11, Attack=14, Zebra=24, Greedie=6, Eek=20}
+
+12:11:30.126 [main] INFO  za.co.entelect.challenge.PlayOffs - Performance results:
+Angus_move-time: ~5.80ms
+Attack_move-time: ~0.03ms
+Eek_move-time: ~92.65ms
+GreedieTactics_move-time: ~0.06ms
+Greedie_move-time: ~0.04ms
+Greedy_move-time: ~0.08ms
+Hayw1r3d_move-time: ~0.04ms
+Kungus_move-time: ~0.06ms
+Layzie_move-time: ~0.01ms
+LayzyTactics_move-time: ~0.02ms
+Layzy_move-time: ~0.01ms
+Vladimir_move-time: ~0.04ms
+Zebra_move-time: ~0.01ms
+
+
+12:11:30.126 [main] INFO  za.co.entelect.challenge.PlayOffs - Rounds:
+AvsB,Zebra,Greedie,GreedieTactics,Greedy,Layzie,Layzy,LayzyTactics,Kungus,Vladimir,Angus,Hayw1r3d,Attack,Eek
+Zebra,1,1,1,1,1,1,1,1,1,1,1,1,0
+Greedie,0,0,0,0,0,0,0,0,0,0,-1,1,0
+GreedieTactics,0,0,0,0,1,0,0,0,0,0,1,1,0
+Greedy,0,0,0,0,0,0,0,0,0,1,0,1,0
+Layzie,0,1,0,0,0,0,0,0,1,1,0,0,0
+Layzy,0,1,0,0,0,0,0,0,1,1,0,0,0
+LayzyTactics,0,1,0,0,0,0,0,0,1,1,0,0,0
+Kungus,0,1,0,0,0,0,0,0,0,0,0,0,0
+Vladimir,0,1,0,0,0,0,0,0,1,1,0,0,0
+Angus,0,0,0,0,0,0,0,0,0,0,-1,0,0
+Hayw1r3d,0,-1,0,1,1,1,1,1,1,1,0,1,1
+Attack,0,0,0,0,1,1,1,1,1,1,0,0,0
+Eek,0,1,0,0,1,1,1,1,1,1,1,0,1
+
+
+
+Process finished with exit code 0
+
+AvsB	Zebra	Greedie	GreedieTactics	Greedy	Layzie	Layzy	LayzyTactics	Kungus	Vladimir	Angus	Hayw1r3d	Attack	Eek
+Zebra	1	1	1	1	1	1	1	1	1	1	1	1	0
+Greedie	0	0	0	0	0	0	0	0	0	0	-1	1	0
+GreedieTactics	0	0	0	0	1	0	0	0	0	0	1	1	0
+Greedy	0	0	0	0	0	0	0	0	0	1	0	1	0
+Layzie	0	1	0	0	0	0	0	0	1	1	0	0	0
+Layzy	0	1	0	0	0	0	0	0	1	1	0	0	0
+LayzyTactics	0	1	0	0	0	0	0	0	1	1	0	0	0
+Kungus	0	1	0	0	0	0	0	0	0	0	0	0	0
+Vladimir	0	1	0	0	0	0	0	0	1	1	0	0	0
+Angus	0	0	0	0	0	0	0	0	0	0	-1	0	0
+Hayw1r3d	0	-1	0	1	1	1	1	1	1	1	0	1	1
+Attack	0	0	0	0	1	1	1	1	1	1	0	0	0
+Eek	0	1	0	0	1	1	1	1	1	1	1	0	1
+
